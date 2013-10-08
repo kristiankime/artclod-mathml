@@ -1,23 +1,23 @@
 start = Term_AddSub
  
 // =====  Add/Sub Term =====
-Term_AddSub = s:Term_MulDiv v:(Add / Sub)*
+Term_AddSub = s:Term_MulDiv ws v:(Add / Sub)*
   { for(var r = s, i=0; i<v.length; i++){ r += v[i]; }; return r; }
  
-Add = "+" v:Term_MulDiv
+Add = "+" ws v:Term_MulDiv
   { return v; }
  
-Sub = "-" v:Term_MulDiv
+Sub = "-" ws v:Term_MulDiv
   { return -1 * v; }
  
 // ===== Mult/Div Term =====
-Term_MulDiv = s:Term_Exp v:(Mul / Div)*
+Term_MulDiv = s:Term_Exp ws v:(Mul / Div)*
   { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; } return r; }
  
-Mul = "*" v:Term_Exp
+Mul = "*" ws v:Term_Exp
   { return v; }
  
-Div = "/" v:Term_Exp
+Div = "/" ws v:Term_Exp
   { return 1 / v; }
  
 // =====  Exp Term =====
@@ -30,7 +30,7 @@ Exp = "^" v:Primary
 // ====== Primary  ====
 Primary = (Parens / Neg / Number )
  
-Parens = "(" v:Term_AddSub ")"
+Parens = "(" ws v:Term_AddSub ws ")"
   { return v; }
  
 Neg = "-" v:Primary
@@ -38,3 +38,6 @@ Neg = "-" v:Primary
  
 Number = digits:([0-9]+) 
   { return parseInt(digits.join(""), 10); }
+  
+ws "whitespace"
+  = [ \t\n\r]*
