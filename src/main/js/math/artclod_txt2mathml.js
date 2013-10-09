@@ -1,6 +1,7 @@
 if(!ARTC){
     var ARTC = {};
 }
+
 ARTC.mathML = (function(){
     var result = {};
     
