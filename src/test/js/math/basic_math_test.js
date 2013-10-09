@@ -1,4 +1,4 @@
-	test("Adding two numbers", function() {
+test("Adding two numbers", function() {
     equal(6, ARTC.basicMath.parse("2+4"));
 });
 
@@ -43,7 +43,7 @@ test("Dividing three numbers", function() {
 });
 
 test("Dividing two numbers, with whitespace", function() {
-    equal(.5, ARTC.basicMath.parse("2/4"));
+    equal(.5, ARTC.basicMath.parse("2 /4"));
 });
 
 test("Multiplication takes precidence over addition", function() {
@@ -80,6 +80,18 @@ test("- negates number", function() {
 
 test("- negates arbitrary term", function() {
     equal(-10, ARTC.basicMath.parse("5+-(5*3)"));
+});
+
+test("Can parse decimals", function() {
+    equal(2.4, ARTC.basicMath.parse("2.4"));
+});
+
+test("Can parse scientific notation", function() {
+    equal(2400, ARTC.basicMath.parse("2.4e3"));
+});
+
+test("Can parse negatives with scientific notation", function() {
+    equal(-2400, ARTC.basicMath.parse("-2.4e3"));
 });
 
 test("2^2+(3*(5^(-1*-2))) = 79", function() {

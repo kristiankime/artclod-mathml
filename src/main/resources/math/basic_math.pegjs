@@ -27,7 +27,7 @@ Term_Exp = s:Primary v:(Exp)*
 Exp = "^" v:Primary
   { return v; }
  
-// ====== Primary  ====
+// ==== Primary  ====
 Primary = (Parens / Neg / Number )
  
 Parens = "(" ws v:Term_AddSub ws ")"
@@ -35,9 +35,19 @@ Parens = "(" ws v:Term_AddSub ws ")"
  
 Neg = "-" v:Primary
   { return -1 * v; }
- 
-Number = digits:([0-9]+) 
-  { return parseInt(digits.join(""), 10); }
-  
+
+// ==== Numbers ==== 
+Number = s:Scientific
+  { return parseFloat(s) }
+Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
+  { return f + (s ? s[0] + s[1]: ""); }
+Floating = i:Integer u:('.' Unsigned )?
+  { return i + (u ? u[0] + u[1].join("") : ""); }
+Integer = s:Sign? u:Unsigned
+  { return (s ? s : "") + u.join(""); }
+Unsigned = [0-9]+
+Sign = '-' / '+'
+
+// ==== Whitespace ====
 ws "whitespace"
   = [ \t\n\r]*
