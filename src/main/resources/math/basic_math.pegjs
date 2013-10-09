@@ -21,17 +21,21 @@ Div = "/" ws v:Term_Exp
   { return 1 / v; }
  
 // =====  Exp Term =====
-Term_Exp = s:Primary v:(Exp)*
+Term_Exp = s:Term_Parens v:(Exp)*
   { for(var r = s, i=0; i<v.length; i++){ r = Math.pow(r, v[i]); }; return r; }
  
 Exp = "^" v:Primary
   { return v; }
  
-// ==== Primary  ====
-Primary = (Parens / Neg / Number )
- 
+// =====  Parens Term =====
+Term_Parens = s:Primary ws v:(Parens)*
+  { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; }; return r; }
+
 Parens = "(" ws v:Term_AddSub ws ")"
   { return v; }
+
+// ==== Primary  ====
+Primary = (Parens / Neg / Number )
  
 Neg = "-" v:Primary
   { return -1 * v; }

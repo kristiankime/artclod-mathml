@@ -102,6 +102,18 @@ test("Can parse negatives with scientific notation", function() {
     equal(-2400, ARTC.text2Number.parse("-2.4e3"));
 });
 
+test("Can parse number then parens", function() {
+    equal(63, ARTC.text2Number.parse("7(4 + 5)"));
+});
+
+test("Can parse number then space then parens", function() {
+    equal(63, ARTC.text2Number.parse("7 (4 + 5)"));
+});
+
+test("Can parse back to back parens", function() {
+    equal(81, ARTC.text2Number.parse("(3 + 6)(4 + 5)"));
+});
+
 test("2^2+(3*(5^(-1*-2))) = 79", function() {
     equal(79, ARTC.text2Number.parse("2^2+(3*(5^(-1*-2)))"));
 });
