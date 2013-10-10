@@ -42,7 +42,7 @@ Neg = "-" v:Primary
 
 // ==== Numbers ==== 
 Number = s:Scientific
-  { return parseFloat(s) }
+  { return parseFloat(s); }
 Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
   { return f + (s ? s[0] + s[1]: ""); }
 Floating = i:Integer u:('.' Unsigned )?
@@ -53,5 +53,4 @@ Unsigned = [0-9]+
 Sign = '-' / '+'
 
 // ==== Whitespace ====
-ws "whitespace"
-  = [ \t\n\r]*
+ws "whitespace" = [ \t\n\r]*

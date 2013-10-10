@@ -599,7 +599,7 @@ ARTC.txt2Num = (function(){
           pos0 = pos;
           result0 = parse_Scientific();
           if (result0 !== null) {
-            result0 = (function(offset, s) { return parseFloat(s) })(pos0, result0);
+            result0 = (function(offset, s) { return parseFloat(s); })(pos0, result0);
           }
           if (result0 === null) {
             pos = pos0;
