@@ -29,13 +29,13 @@ Exp = "^" v:Primary
  
 // =====  Parens Term =====
 Term_Parens = s:Primary ws v:(Parens)*
-  { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
+  { return (v.length > 0 ? "<apply> <mult/> " + s + " " + v + " </apply>" : s); }
 
 Parens = "(" ws v:Term_AddSub ws ")"
   { return v; }
 
 // ==== Primary  ====
-Primary = v:(Parens / Neg / Number )
+Primary = v:(Parens / Number/ Neg)
   { return v; }
 
 Neg = "-" v:Primary

@@ -548,9 +548,9 @@ ARTC.txt2Num = (function(){
           
           result0 = parse_Parens();
           if (result0 === null) {
-            result0 = parse_Neg();
+            result0 = parse_Number();
             if (result0 === null) {
-              result0 = parse_Number();
+              result0 = parse_Neg();
             }
           }
           return result0;

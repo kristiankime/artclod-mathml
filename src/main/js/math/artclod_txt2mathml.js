@@ -474,7 +474,7 @@ ARTC.txt2MathML = (function(){
             pos = pos1;
           }
           if (result0 !== null) {
-            result0 = (function(offset, s, v) { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;})(pos0, result0[0], result0[2]);
+            result0 = (function(offset, s, v) { return (v.length > 0 ? "<apply> <mult/> " + s + " " + v + " </apply>" : s); })(pos0, result0[0], result0[2]);
           }
           if (result0 === null) {
             pos = pos0;
@@ -551,9 +551,9 @@ ARTC.txt2MathML = (function(){
           pos0 = pos;
           result0 = parse_Parens();
           if (result0 === null) {
-            result0 = parse_Neg();
+            result0 = parse_Number();
             if (result0 === null) {
-              result0 = parse_Number();
+              result0 = parse_Neg();
             }
           }
           if (result0 !== null) {
