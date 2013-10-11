@@ -132,10 +132,20 @@ test("Can parse back to back parens", function() {
     equal(ARTC.txt2MathML.parse("(3 + 6)(4 + 5)"), "<apply> <mult/> <apply> <plus/> <cn> 3 </cn> <cn> 6 </cn> </apply> <apply> <plus/> <cn> 4 </cn> <cn> 5 </cn> </apply> </apply>");
 });
 
-test("parse 2^2+(3*(5^(-1*-2)))", function() {
+test("Can parse 2^2+(3*(5^(-1*-2)))", function() {
     equal(ARTC.txt2MathML.parse("2^2+(3*(5^(-1*-2)))"), "<apply> <plus/> <apply> <power/> <cn> 2 </cn> <cn> 2 </cn> </apply> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 5 </cn> <apply> <times/> <cn> -1 </cn> <cn> -2 </cn> </apply> </apply> </apply> </apply>");
 });
 
-test("parse 2.5e1 + 6.2", function() {
+test("can parse 2.5e1 + 6.2", function() {
     equal(ARTC.txt2MathML.parse("2.5e1 + 6.2"), "<apply> <plus/> <cn> 2.5e1 </cn> <cn> 6.2 </cn> </apply>");
 });
+
+test("Can parse x as a variable", function() {
+    equal(ARTC.txt2MathML.parse("x"), "<ci> x </ci>");
+});
+
+test("Can parse an equation with x in it", function() {
+    equal(ARTC.txt2MathML.parse("3 + (4 - -x)^3"), "<apply> <plus/> <cn> 3 </cn> <apply> <power/> <apply> <minus/> <cn> 4 </cn> <apply> <minus/> <ci> x </ci> </apply> </apply> <cn> 3 </cn> </apply> </apply>");
+});
+
+

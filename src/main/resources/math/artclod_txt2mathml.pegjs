@@ -35,7 +35,7 @@ Parens = "(" ws v:Term_AddSub ws ")"
   { return v; }
 
 // ==== Primary  ====
-Primary = v:(Parens / Number/ Neg)
+Primary = v:(Parens / Number/ Neg / Variable)
   { return v; }
 
 Neg = "-" v:Primary

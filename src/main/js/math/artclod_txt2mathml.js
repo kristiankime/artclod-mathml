@@ -554,6 +554,9 @@ ARTC.txt2MathML = (function(){
             result0 = parse_Number();
             if (result0 === null) {
               result0 = parse_Neg();
+              if (result0 === null) {
+                result0 = parse_Variable();
+              }
             }
           }
           if (result0 !== null) {
