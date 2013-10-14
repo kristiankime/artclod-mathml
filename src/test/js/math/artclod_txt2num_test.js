@@ -121,3 +121,14 @@ test("2^2+(3*(5^(-1*-2))) = 79", function() {
 test("2.5e1 + 6.2 = 31.2", function() {
     equal(ARTC.txt2Num.parse("2.5e1 + 6.2"), 31.2);
 });
+
+test("Can parse power then parens", function() {
+    equal(ARTC.txt2Num.parse("2^2(2)"), 8);
+});
+
+test("(2^2)2", function() {
+    equal(ARTC.txt2Num.parse("(2^2)2"), 8);
+});
+
+
+

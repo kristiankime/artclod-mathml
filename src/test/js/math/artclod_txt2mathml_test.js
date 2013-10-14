@@ -148,4 +148,9 @@ test("Can parse an equation with x in it", function() {
     equal(ARTC.txt2MathML.parse("3 + (4 - -x)^3"), "<apply> <plus/> <cn> 3 </cn> <apply> <power/> <apply> <minus/> <cn> 4 </cn> <apply> <minus/> <ci> x </ci> </apply> </apply> <cn> 3 </cn> </apply> </apply>");
 });
 
+test("(2^2)2", function() {
+    equal(ARTC.txt2MathML.parse("(2^2)2"), 8);
+});
+
+
 
