@@ -5,6 +5,11 @@ test("Status is failure if id is falsey", function() {
     deepEqual({ success : false, reason : "id falsey", details : null }, res);
 });
 
+test("Nothing happens if callback does not exist", function() {
+    ARTC.updateContentMathML(null, "<cn>3<cn/>");
+    ok(true, "no errors should be thrown"); 
+});
+
 test("Status is failure if mathMLStr is falsey", function() {
     var res = null;
     ARTC.updateContentMathML("id", null, function(s){res = s;});

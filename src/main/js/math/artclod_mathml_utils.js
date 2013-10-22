@@ -31,7 +31,7 @@ ARTC.isFunction = function(obj) {
  */ 
 ARTC.updateContentMathML = function(id, mathMLStr, callback) {
     var safeCallback = function() {/* noop */;};
-    if(ARTC.isFunction(safeCallback)){
+    if(ARTC.isFunction(callback)){
 	safeCallback = callback;
     }
     
