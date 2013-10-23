@@ -1,4 +1,5 @@
-start = Term_AddSub
+start = v:Term_AddSub
+  { return "<math> " + v + " </math>" }
  
 // =====  Add/Sub Term =====
 Term_AddSub = s:Term_MulDiv ws v:(Add / Sub)*
