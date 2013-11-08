@@ -27,15 +27,27 @@ Term_Exp = s:Term_Parens ws v:(Exp)*
 Exp = "^" ws v:Primary
   { return v; }
  
-// =====  Parens Term =====
-Term_Parens = s:Primary v:(Parens)*
+// ===== Parens Term =====
+Term_Parens = s:Term_Functions v:(Parens)*
   { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; }; return r; }
 
 Parens = ws "(" ws v:Term_AddSub ws ")"
   { return v; }
 
+// ==== Function Terms  ====
+Term_Functions = s:Primary v:(Functions)*
+  { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; }; return r; }
+
+Functions = (exp / log)
+
+exp = "exp(" ws b:Term_AddSub ws "," e:Term_AddSub ")"
+  { return Math.pow(b, e); } 
+
+log = "log(" ws b:Number ws "," v:Term_AddSub ")"
+  { return Math.log(v) / Math.log(b); } 
+
 // ==== Primary  ====
-Primary = ws v:(Parens / Number / Neg )
+Primary = ws v:(Functions / Parens / Number / Neg )
   { return v; }
  
 Neg = "-" v:Primary

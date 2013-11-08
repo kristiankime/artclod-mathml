@@ -122,6 +122,18 @@ test("2.5e1 + 6.2 = 31.2", function() {
     equal(ARTC.txt2Num.parse("2.5e1 + 6.2"), 31.2);
 });
 
+test("Can parse log", function() {
+    equal(ARTC.txt2Num.parse("log(10, 10)"), 1);
+});
+
+test("Can parse exp", function() {
+    equal(ARTC.txt2Num.parse("exp(10, 2)"), 100);
+});
+
+test("Can parse symbols and function names", function() {
+    equal(ARTC.txt2Num.parse("3*exp(10, 2)"), 300);
+});
+
 test("Can parse power then parens", function() {
     equal(ARTC.txt2Num.parse("2^2(2)"), 8);
 });
