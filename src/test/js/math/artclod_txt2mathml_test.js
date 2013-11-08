@@ -131,6 +131,30 @@ test("Can parse an equation with x in it", function() {
     equal(ARTC.txt2MathML.parse("3 + (4 - -x)^3"), "<math> <apply> <plus/> <cn> 3 </cn> <apply> <power/> <apply> <minus/> <cn> 4 </cn> <apply> <minus/> <ci> x </ci> </apply> </apply> <cn> 3 </cn> </apply> </apply> </math>");
 });
 
-test("(2^2)2", function() {
+test("Can parse log", function() {
+    equal(ARTC.txt2MathML.parse("log(10, 10)"), "<math> <apply> <log/> <logbase> <cn> 10 </cn> </logbase> <cn> 10 </cn> </apply> </math>");
+});
+
+test("Can parse exp", function() {
+    equal(ARTC.txt2MathML.parse("exp(10, 2)"), "<math> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </math>");
+});
+
+test("Can parse symbols and function names", function() {
+    equal(ARTC.txt2MathML.parse("3*exp(10, 2)"), "<math> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>");
+});
+
+test("Can parse power then parens", function() {
+    equal(ARTC.txt2MathML.parse("2^2(2)"), 8);
+});
+
+test("(2^2)2 = 8", function() {
     equal(ARTC.txt2MathML.parse("(2^2)2"), 8);
+});
+
+test("(3)3 = 9", function() {
+    equal(ARTC.txt2MathML.parse("(2^2)2"), 9);
+});
+
+test("3 (3) 3 = 27", function() {
+    equal(ARTC.txt2MathML.parse("3 (3) 3"), 27);
 });
