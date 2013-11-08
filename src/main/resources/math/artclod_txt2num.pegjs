@@ -21,21 +21,22 @@ Div = "/" ws v:Term_Exp
   { return 1 / v; }
  
 // =====  Exp Term =====
-Term_Exp = s:Term_Parens v:(Exp)*
+Term_Exp = s:Term_Parens ws v:(Exp)*
   { for(var r = s, i=0; i<v.length; i++){ r = Math.pow(r, v[i]); }; return r; }
  
-Exp = "^" v:Primary
+Exp = "^" ws v:Primary
   { return v; }
  
 // =====  Parens Term =====
-Term_Parens = s:Primary ws v:(Parens)*
+Term_Parens = s:Primary v:(Parens)*
   { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; }; return r; }
 
-Parens = "(" ws v:Term_AddSub ws ")"
+Parens = ws "(" ws v:Term_AddSub ws ")"
   { return v; }
 
 // ==== Primary  ====
-Primary = (Parens / Number / Neg )
+Primary = ws v:(Parens / Number / Neg )
+  { return v; }
  
 Neg = "-" v:Primary
   { return -1 * v; }

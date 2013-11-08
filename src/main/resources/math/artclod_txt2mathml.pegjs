@@ -1,5 +1,5 @@
 start = v:Term_AddSub
-  { return "<math> " + v + " </math>" }
+  { return "<math> " + v + " </math>"; }
  
 // =====  Add/Sub Term =====
 Term_AddSub = s:Term_MulDiv ws v:(Add / Sub)*
@@ -22,21 +22,21 @@ Div = "/" ws v:Term_Exp
   { return (function(a){return "<apply> <divide/> " + a + " " + v + " </apply>";}) ;}
  
 // =====  Exp Term =====
-Term_Exp = s:Term_Parens v:(Exp)*
+Term_Exp = s:Term_Parens ws v:(Exp)*
   { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
  
-Exp = "^" v:Primary
+Exp = "^" ws v:Primary
   { return (function(a){return "<apply> <power/> " + a + " " + v + " </apply>";}) ;}
  
 // =====  Parens Term =====
-Term_Parens = s:Primary ws v:(Parens)*
+Term_Parens = s:Primary v:(Parens)*
   { return (v.length > 0 ? "<apply> <mult/> " + s + " " + v + " </apply>" : s); }
 
-Parens = "(" ws v:Term_AddSub ws ")"
+Parens = ws "(" ws v:Term_AddSub ws ")"
   { return v; }
 
 // ==== Primary  ====
-Primary = v:(Parens / Number/ Neg / Variable)
+Primary = ws v:(Parens / Number/ Neg / Variable)
   { return v; }
 
 Neg = "-" v:Primary

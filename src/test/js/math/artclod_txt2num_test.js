@@ -126,9 +126,14 @@ test("Can parse power then parens", function() {
     equal(ARTC.txt2Num.parse("2^2(2)"), 8);
 });
 
-test("(2^2)2", function() {
+test("(2^2)2 = 8", function() {
     equal(ARTC.txt2Num.parse("(2^2)2"), 8);
 });
 
+test("(3)3 = 9", function() {
+    equal(ARTC.txt2Num.parse("(2^2)2"), 9);
+});
 
-
+test("3 (3) 3 = 27", function() {
+    equal(ARTC.txt2Num.parse("3 (3) 3"), 27);
+});
