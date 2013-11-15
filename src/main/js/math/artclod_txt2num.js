@@ -55,6 +55,7 @@ ARTC.txt2Num = (function(){
           "Functions": parse_Functions,
           "exp": parse_exp,
           "log": parse_log,
+          "ln": parse_ln,
           "Primary": parse_Primary,
           "Neg": parse_Neg,
           "Number": parse_Number,
@@ -598,6 +599,9 @@ ARTC.txt2Num = (function(){
           result0 = parse_exp();
           if (result0 === null) {
             result0 = parse_log();
+            if (result0 === null) {
+              result0 = parse_ln();
+            }
           }
           return result0;
         }
@@ -685,8 +689,8 @@ ARTC.txt2Num = (function(){
         }
         
         function parse_log() {
-          var result0, result1, result2, result3, result4, result5, result6;
-          var pos0, pos1;
+          var result0, result1, result2, result3, result4;
+          var pos0, pos1, pos2;
           
           pos0 = pos;
           pos1 = pos;
@@ -702,6 +706,7 @@ ARTC.txt2Num = (function(){
           if (result0 !== null) {
             result1 = parse_ws();
             if (result1 !== null) {
+              pos2 = pos;
               result2 = parse_Number();
               if (result2 !== null) {
                 result3 = parse_ws();
@@ -716,27 +721,34 @@ ARTC.txt2Num = (function(){
                     }
                   }
                   if (result4 !== null) {
-                    result5 = parse_Term_AddSub();
-                    if (result5 !== null) {
-                      if (input.charCodeAt(pos) === 41) {
-                        result6 = ")";
-                        pos++;
-                      } else {
-                        result6 = null;
-                        if (reportFailures === 0) {
-                          matchFailed("\")\"");
-                        }
-                      }
-                      if (result6 !== null) {
-                        result0 = [result0, result1, result2, result3, result4, result5, result6];
-                      } else {
-                        result0 = null;
-                        pos = pos1;
-                      }
-                    } else {
-                      result0 = null;
-                      pos = pos1;
+                    result2 = [result2, result3, result4];
+                  } else {
+                    result2 = null;
+                    pos = pos2;
+                  }
+                } else {
+                  result2 = null;
+                  pos = pos2;
+                }
+              } else {
+                result2 = null;
+                pos = pos2;
+              }
+              result2 = result2 !== null ? result2 : "";
+              if (result2 !== null) {
+                result3 = parse_Term_AddSub();
+                if (result3 !== null) {
+                  if (input.charCodeAt(pos) === 41) {
+                    result4 = ")";
+                    pos++;
+                  } else {
+                    result4 = null;
+                    if (reportFailures === 0) {
+                      matchFailed("\")\"");
                     }
+                  }
+                  if (result4 !== null) {
+                    result0 = [result0, result1, result2, result3, result4];
                   } else {
                     result0 = null;
                     pos = pos1;
@@ -758,7 +770,57 @@ ARTC.txt2Num = (function(){
             pos = pos1;
           }
           if (result0 !== null) {
-            result0 = (function(offset, b, v) { return Math.log(v) / Math.log(b); })(pos0, result0[2], result0[5]);
+            result0 = (function(offset, b, v) { return Math.log(v) / Math.log((b ? b[0] : 10)); })(pos0, result0[2], result0[3]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_ln() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 3) === "ln(") {
+            result0 = "ln(";
+            pos += 3;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"ln(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return Math.log(v); })(pos0, result0[1]);
           }
           if (result0 === null) {
             pos = pos0;

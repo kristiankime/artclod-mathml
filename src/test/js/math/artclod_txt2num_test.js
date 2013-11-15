@@ -126,6 +126,14 @@ test("Can parse log", function() {
     equal(ARTC.txt2Num.parse("log(10, 10)"), 1);
 });
 
+test("Can parse log without base (defaults to 10)", function() {
+    equal(ARTC.txt2Num.parse("log(10)"), 1);
+});
+
+test("Can parse ln", function() {
+    equal(ARTC.txt2Num.parse("ln(10)"), Math.log(10));
+});
+
 test("Can parse exp", function() {
     equal(ARTC.txt2Num.parse("exp(10, 2)"), 100);
 });

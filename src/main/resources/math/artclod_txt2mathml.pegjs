@@ -39,13 +39,16 @@ Parens = ws "(" ws v:Term_AddSub ws ")"
 Term_Functions = s:Primary v:(Functions)*
   { for(var r = s, i=0; i<v.length; i++){ r += v[i]; }; return r; }
 
-Functions = (exp / log)
+Functions = (exp / log / ln)
 
 exp = "exp(" ws b:Term_AddSub ws "," e:Term_AddSub ")"
-  { return "<apply> <power/> " + b + " " + e + " </apply>"; } 
+  { return "<apply> <power/> " + b + " " + e + " </apply>"; }
 
-log = "log(" ws b:Number ws "," v:Term_AddSub ")"
-  { return "<apply> <log/> <logbase> " + b + " </logbase> " + v + " </apply>"; } 
+log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
+  { return "<apply> <log/> " + (b ? "<logbase> " + b[0] + " </logbase> " : "") + v + " </apply>"; } 
+
+ln = "ln(" v:Term_AddSub ")"
+  { return "<apply> <ln/> " + v + " </apply>"; } 
 
 // ==== Primary  ====
 Primary = ws v:(Functions / Parens / Number/ Neg / Variable)

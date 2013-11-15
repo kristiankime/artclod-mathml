@@ -135,6 +135,14 @@ test("Can parse log", function() {
     equal(ARTC.txt2MathML.parse("log(10, 10)"), "<math> <apply> <log/> <logbase> <cn> 10 </cn> </logbase> <cn> 10 </cn> </apply> </math>");
 });
 
+test("Can parse log without base", function() {
+    equal(ARTC.txt2MathML.parse("log(10)"),  "<math> <apply> <log/> <cn> 10 </cn> </apply> </math>");
+});
+
+test("Can parse ln", function() {
+    equal(ARTC.txt2MathML.parse("ln(10)"),  "<math> <apply> <ln/> <cn> 10 </cn> </apply> </math>");
+});
+
 test("Can parse exp", function() {
     equal(ARTC.txt2MathML.parse("exp(10, 2)"), "<math> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </math>");
 });
