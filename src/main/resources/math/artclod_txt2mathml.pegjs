@@ -51,7 +51,7 @@ ln = "ln(" v:Term_AddSub ")"
   { return "<apply> <ln/> " + v + " </apply>"; } 
 
 // ==== Primary  ====
-Primary = ws v:(Functions / Parens / Number/ Neg / Variable)
+Primary = ws v:(Functions / Parens / E / Number / Neg / Variable)
   { return v; }
 
 Neg = "-" v:Primary
@@ -61,6 +61,9 @@ Variable = [xX]
   { return "<ci> x </ci>"; }
 
 // ==== Numbers ==== 
+E = ('e' / 'E' )
+  { return "<exponentiale/>"; }
+
 Number = s:Scientific
   { return "<cn> " + s + " </cn>"; }
 Scientific = f:Floating s:( ('e' / 'E' ) Integer )?

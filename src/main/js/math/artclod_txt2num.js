@@ -58,6 +58,7 @@ ARTC.txt2Num = (function(){
           "ln": parse_ln,
           "Primary": parse_Primary,
           "Neg": parse_Neg,
+          "E": parse_E,
           "Number": parse_Number,
           "Scientific": parse_Scientific,
           "Floating": parse_Floating,
@@ -840,9 +841,12 @@ ARTC.txt2Num = (function(){
             if (result1 === null) {
               result1 = parse_Parens();
               if (result1 === null) {
-                result1 = parse_Number();
+                result1 = parse_E();
                 if (result1 === null) {
-                  result1 = parse_Neg();
+                  result1 = parse_Number();
+                  if (result1 === null) {
+                    result1 = parse_Neg();
+                  }
                 }
               }
             }
@@ -894,6 +898,40 @@ ARTC.txt2Num = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset, v) { return -1 * v; })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_E() {
+          var result0;
+          var pos0;
+          
+          pos0 = pos;
+          if (input.charCodeAt(pos) === 101) {
+            result0 = "e";
+            pos++;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"e\"");
+            }
+          }
+          if (result0 === null) {
+            if (input.charCodeAt(pos) === 69) {
+              result0 = "E";
+              pos++;
+            } else {
+              result0 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"E\"");
+              }
+            }
+          }
+          if (result0 !== null) {
+            result0 = (function(offset) { return Math.E; })(pos0);
           }
           if (result0 === null) {
             pos = pos0;

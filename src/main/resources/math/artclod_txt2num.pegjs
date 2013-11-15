@@ -50,13 +50,16 @@ ln = "ln(" v:Term_AddSub ")"
   { return Math.log(v); } 
 
 // ==== Primary  ====
-Primary = ws v:(Functions / Parens / Number / Neg )
+Primary = ws v:(Functions / Parens / E / Number / Neg )
   { return v; }
  
 Neg = "-" v:Primary
   { return -1 * v; }
 
-// ==== Numbers ==== 
+// ==== Numbers ====
+E = ('e' / 'E' )
+  { return Math.E; }
+
 Number = s:Scientific
   { return parseFloat(s); }
 Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
