@@ -138,6 +138,10 @@ test("Can parse exp", function() {
     equal(ARTC.txt2Num.parse("exp(10, 2)"), 100);
 });
 
+test("Can parse e", function() {
+    equal(ARTC.txt2Num.parse("e"), Math.E);
+});
+
 test("Can parse symbols and function names", function() {
     equal(ARTC.txt2Num.parse("3*exp(10, 2)"), 300);
 });
