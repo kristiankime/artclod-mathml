@@ -151,6 +151,34 @@ test("Can parse e", function() {
     equal(ARTC.txt2MathML.parse("e"), "<math> <exponentiale/> </math>");
 });
 
+test("Can parse pi", function() {
+    equal(ARTC.txt2MathML.parse("pi"), "<math> <pi/> </math>");
+});
+
+test("Can parse sin", function() {
+    equal(ARTC.txt2MathML.parse("sin(Pi)"), "<math> <apply> <sin/> <pi/> </apply> </math>");
+});
+
+test("Can parse cos", function() {
+    equal(ARTC.txt2MathML.parse("cos(Pi)"), "<math> <apply> <cos/> <pi/> </apply> </math>");
+});
+
+test("Can parse tan", function() {
+    equal(ARTC.txt2MathML.parse("tan(Pi)"), "<math> <apply> <tan/> <pi/> </apply> </math>");
+});
+
+test("Can parse sec", function() {
+    equal(ARTC.txt2MathML.parse("sec(Pi)"), "<math> <apply> <sec/> <pi/> </apply> </math>");
+});
+
+test("Can parse csc", function() {
+    equal(ARTC.txt2MathML.parse("csc(Pi)"), "<math> <apply> <csc/> <pi/> </apply> </math>");
+});
+
+test("Can parse cot", function() {
+    equal(ARTC.txt2MathML.parse("cot(Pi)"), "<math> <apply> <cot/> <pi/> </apply> </math>");
+});
+
 test("Can parse symbols and function names", function() {
     equal(ARTC.txt2MathML.parse("3*exp(10, 2)"), "<math> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>");
 });

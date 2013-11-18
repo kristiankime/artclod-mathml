@@ -170,7 +170,6 @@ test("Can parse cot", function() {
     equal(ARTC.txt2Num.parse("cot(Pi*(3/4))"), -0.9999999999999998);
 });
 
-
 test("Can parse symbols and function names", function() {
     equal(ARTC.txt2Num.parse("3*exp(10, 2)"), 300);
 });

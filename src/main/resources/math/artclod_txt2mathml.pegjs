@@ -39,7 +39,9 @@ Parens = ws "(" ws v:Term_AddSub ws ")"
 Term_Functions = s:Primary v:(Functions)*
   { for(var r = s, i=0; i<v.length; i++){ r += v[i]; }; return r; }
 
-Functions = (exp / log / ln)
+Functions = (power / trig)
+
+power = (exp / log / ln)
 
 exp = "exp(" ws b:Term_AddSub ws "," e:Term_AddSub ")"
   { return "<apply> <power/> " + b + " " + e + " </apply>"; }
@@ -50,8 +52,28 @@ log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
 ln = "ln(" v:Term_AddSub ")"
   { return "<apply> <ln/> " + v + " </apply>"; } 
 
+trig = (sin / cos / tan / sec / csc / cot)
+
+sin = "sin(" v:Term_AddSub ")"
+  { return "<apply> <sin/> " + v + " </apply>"; } 
+
+cos = "cos(" v:Term_AddSub ")"
+  { return "<apply> <cos/> " + v + " </apply>"; } 
+
+tan = "tan(" v:Term_AddSub ")"
+  { return "<apply> <tan/> " + v + " </apply>"; } 
+
+sec = "sec(" v:Term_AddSub ")"
+  { return "<apply> <sec/> " + v + " </apply>"; } 
+
+csc = "csc(" v:Term_AddSub ")"
+  { return "<apply> <csc/> " + v + " </apply>"; } 
+
+cot = "cot(" v:Term_AddSub ")"
+  { return "<apply> <cot/> " + v + " </apply>"; } 
+
 // ==== Primary  ====
-Primary = ws v:(Functions / Parens / E / Number / Neg / Variable)
+Primary = ws v:(Functions / Parens / Constant / Number / Neg / Variable)
   { return v; }
 
 Neg = "-" v:Primary
@@ -60,10 +82,16 @@ Neg = "-" v:Primary
 Variable = [xX]
   { return "<ci> x </ci>"; }
 
-// ==== Numbers ==== 
+// ==== Constant ====
+Constant = (E / Pi)
+
 E = ('e' / 'E' )
   { return "<exponentiale/>"; }
 
+Pi = ('Pi' / 'pi' )
+  { return "<pi/>"; }
+
+// ==== Numbers ==== 
 Number = s:Scientific
   { return "<cn> " + s + " </cn>"; }
 Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
