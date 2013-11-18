@@ -53,12 +53,22 @@ ARTC.txt2Num = (function(){
           "Parens": parse_Parens,
           "Term_Functions": parse_Term_Functions,
           "Functions": parse_Functions,
+          "power": parse_power,
           "exp": parse_exp,
           "log": parse_log,
           "ln": parse_ln,
+          "trig": parse_trig,
+          "sin": parse_sin,
+          "cos": parse_cos,
+          "tan": parse_tan,
+          "sec": parse_sec,
+          "csc": parse_csc,
+          "cot": parse_cot,
           "Primary": parse_Primary,
           "Neg": parse_Neg,
+          "Constant": parse_Constant,
           "E": parse_E,
+          "Pi": parse_Pi,
           "Number": parse_Number,
           "Scientific": parse_Scientific,
           "Floating": parse_Floating,
@@ -597,6 +607,16 @@ ARTC.txt2Num = (function(){
         function parse_Functions() {
           var result0;
           
+          result0 = parse_power();
+          if (result0 === null) {
+            result0 = parse_trig();
+          }
+          return result0;
+        }
+        
+        function parse_power() {
+          var result0;
+          
           result0 = parse_exp();
           if (result0 === null) {
             result0 = parse_log();
@@ -829,6 +849,328 @@ ARTC.txt2Num = (function(){
           return result0;
         }
         
+        function parse_trig() {
+          var result0;
+          
+          result0 = parse_sin();
+          if (result0 === null) {
+            result0 = parse_cos();
+            if (result0 === null) {
+              result0 = parse_tan();
+              if (result0 === null) {
+                result0 = parse_sec();
+                if (result0 === null) {
+                  result0 = parse_csc();
+                  if (result0 === null) {
+                    result0 = parse_cot();
+                  }
+                }
+              }
+            }
+          }
+          return result0;
+        }
+        
+        function parse_sin() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "sin(") {
+            result0 = "sin(";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"sin(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return Math.sin(v); })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_cos() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "cos(") {
+            result0 = "cos(";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"cos(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return Math.cos(v); })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_tan() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "tan(") {
+            result0 = "tan(";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"tan(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return Math.tan(v); })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_sec() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "sec(") {
+            result0 = "sec(";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"sec(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return 1/Math.cos(v); })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_csc() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "csc(") {
+            result0 = "csc(";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"csc(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return 1/Math.sin(v); })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_cot() {
+          var result0, result1, result2;
+          var pos0, pos1;
+          
+          pos0 = pos;
+          pos1 = pos;
+          if (input.substr(pos, 4) === "cot(") {
+            result0 = "cot(";
+            pos += 4;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"cot(\"");
+            }
+          }
+          if (result0 !== null) {
+            result1 = parse_Term_AddSub();
+            if (result1 !== null) {
+              if (input.charCodeAt(pos) === 41) {
+                result2 = ")";
+                pos++;
+              } else {
+                result2 = null;
+                if (reportFailures === 0) {
+                  matchFailed("\")\"");
+                }
+              }
+              if (result2 !== null) {
+                result0 = [result0, result1, result2];
+              } else {
+                result0 = null;
+                pos = pos1;
+              }
+            } else {
+              result0 = null;
+              pos = pos1;
+            }
+          } else {
+            result0 = null;
+            pos = pos1;
+          }
+          if (result0 !== null) {
+            result0 = (function(offset, v) { return 1/Math.tan(v); })(pos0, result0[1]);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
         function parse_Primary() {
           var result0, result1;
           var pos0, pos1;
@@ -841,7 +1183,7 @@ ARTC.txt2Num = (function(){
             if (result1 === null) {
               result1 = parse_Parens();
               if (result1 === null) {
-                result1 = parse_E();
+                result1 = parse_Constant();
                 if (result1 === null) {
                   result1 = parse_Number();
                   if (result1 === null) {
@@ -905,6 +1247,16 @@ ARTC.txt2Num = (function(){
           return result0;
         }
         
+        function parse_Constant() {
+          var result0;
+          
+          result0 = parse_E();
+          if (result0 === null) {
+            result0 = parse_Pi();
+          }
+          return result0;
+        }
+        
         function parse_E() {
           var result0;
           var pos0;
@@ -932,6 +1284,40 @@ ARTC.txt2Num = (function(){
           }
           if (result0 !== null) {
             result0 = (function(offset) { return Math.E; })(pos0);
+          }
+          if (result0 === null) {
+            pos = pos0;
+          }
+          return result0;
+        }
+        
+        function parse_Pi() {
+          var result0;
+          var pos0;
+          
+          pos0 = pos;
+          if (input.substr(pos, 2) === "Pi") {
+            result0 = "Pi";
+            pos += 2;
+          } else {
+            result0 = null;
+            if (reportFailures === 0) {
+              matchFailed("\"Pi\"");
+            }
+          }
+          if (result0 === null) {
+            if (input.substr(pos, 2) === "pi") {
+              result0 = "pi";
+              pos += 2;
+            } else {
+              result0 = null;
+              if (reportFailures === 0) {
+                matchFailed("\"pi\"");
+              }
+            }
+          }
+          if (result0 !== null) {
+            result0 = (function(offset) { return Math.PI; })(pos0);
           }
           if (result0 === null) {
             pos = pos0;

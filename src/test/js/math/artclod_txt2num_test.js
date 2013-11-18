@@ -142,6 +142,35 @@ test("Can parse e", function() {
     equal(ARTC.txt2Num.parse("e"), Math.E);
 });
 
+test("Can parse pi", function() {
+    equal(ARTC.txt2Num.parse("pi"), Math.PI);
+});
+
+test("Can parse sin", function() {
+    equal(ARTC.txt2Num.parse("sin(Pi/2)"), 1);
+});
+
+test("Can parse cos", function() {
+    equal(ARTC.txt2Num.parse("cos(Pi)"), -1);
+});
+
+test("Can parse tan", function() {
+    equal(ARTC.txt2Num.parse("tan(0)"), 0);
+});
+
+test("Can parse sec", function() {
+    equal(ARTC.txt2Num.parse("sec(Pi)"), -1);
+});
+
+test("Can parse csc", function() {
+    equal(ARTC.txt2Num.parse("csc(Pi/2)"), 1);
+});
+
+test("Can parse cot", function() {
+    equal(ARTC.txt2Num.parse("cot(Pi*(3/4))"), -0.9999999999999998);
+});
+
+
 test("Can parse symbols and function names", function() {
     equal(ARTC.txt2Num.parse("3*exp(10, 2)"), 300);
 });

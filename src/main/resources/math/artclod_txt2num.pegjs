@@ -38,7 +38,9 @@ Parens = ws "(" ws v:Term_AddSub ws ")"
 Term_Functions = s:Primary v:(Functions)*
   { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; }; return r; }
 
-Functions = (exp / log / ln)
+Functions = (power / trig)
+
+power = (exp / log / ln)
 
 exp = "exp(" ws b:Term_AddSub ws "," e:Term_AddSub ")"
   { return Math.pow(b, e); } 
@@ -47,19 +49,46 @@ log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
   { return Math.log(v) / Math.log((b ? b[0] : 10)); } 
 
 ln = "ln(" v:Term_AddSub ")"
-  { return Math.log(v); } 
+  { return Math.log(v); }
+
+trig = (sin / cos / tan / sec / csc / cot)
+
+sin = "sin(" v:Term_AddSub ")"
+  { return Math.sin(v); }
+
+cos = "cos(" v:Term_AddSub ")"
+  { return Math.cos(v); }
+
+tan = "tan(" v:Term_AddSub ")"
+  { return Math.tan(v); }
+
+sec = "sec(" v:Term_AddSub ")"
+  { return 1/Math.cos(v); }
+
+csc = "csc(" v:Term_AddSub ")"
+  { return 1/Math.sin(v); }
+
+cot = "cot(" v:Term_AddSub ")"
+  { return 1/Math.tan(v); }
+
 
 // ==== Primary  ====
-Primary = ws v:(Functions / Parens / E / Number / Neg )
+Primary = ws v:(Functions / Parens / Constant / Number / Neg )
   { return v; }
  
 Neg = "-" v:Primary
   { return -1 * v; }
 
-// ==== Numbers ====
+// ==== Constant ====
+Constant = (E / Pi)
+
 E = ('e' / 'E' )
   { return Math.E; }
 
+Pi = ('Pi' / 'pi' )
+  { return Math.PI; }
+
+// ==== Numbers ====
 Number = s:Scientific
   { return parseFloat(s); }
 Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
