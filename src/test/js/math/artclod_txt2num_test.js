@@ -174,6 +174,7 @@ test("Can parse symbols and function names", function() {
     equal(ARTC.txt2Num.parse("3*exp(10, 2)"), 300);
 });
 
+/*
 test("Can parse power then parens", function() {
     equal(ARTC.txt2Num.parse("2^2(2)"), 8);
 });
@@ -188,4 +189,13 @@ test("(3)3 = 9", function() {
 
 test("3 (3) 3 = 27", function() {
     equal(ARTC.txt2Num.parse("3 (3) 3"), 27);
+});
+*/
+
+test("1 / ((-2*2 +3)^5) = -1", function() {
+    equal(ARTC.txt2Num.parse("1 / ((-2*2 +3)^5)"), -1);
+});
+
+test("2*2^2 /2 = 4, this is here to test parsing the space", function() {
+    equal(ARTC.txt2Num.parse("2*2^2 /2"), 4);
 });

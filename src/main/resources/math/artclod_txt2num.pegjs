@@ -24,11 +24,11 @@ Div = "/" ws v:Term_Exp
 Term_Exp = s:Term_Parens ws v:(Exp)*
   { for(var r = s, i=0; i<v.length; i++){ r = Math.pow(r, v[i]); }; return r; }
  
-Exp = "^" ws v:Primary
+Exp = "^" ws v:Term_Parens
   { return v; }
  
 // ===== Parens Term =====
-Term_Parens = s:Term_Functions v:(Parens)*
+Term_Parens = s:Term_Functions ws v:(Parens)*
   { for(var r = s, i=0; i<v.length; i++){ r *= v[i]; }; return r; }
 
 Parens = ws "(" ws v:Term_AddSub ws ")"

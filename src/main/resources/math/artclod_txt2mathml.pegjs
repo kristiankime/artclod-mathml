@@ -25,11 +25,11 @@ Div = "/" ws v:Term_Exp
 Term_Exp = s:Term_Parens ws v:(Exp)*
   { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
  
-Exp = "^" ws v:Primary
+Exp = "^" ws v:Term_Parens
   { return (function(a){return "<apply> <power/> " + a + " " + v + " </apply>";}) ;}
  
 // =====  Parens Term =====
-Term_Parens = s:Term_Functions v:(Parens)*
+Term_Parens = s:Term_Functions ws v:(Parens)*
   { return (v.length > 0 ? "<apply> <mult/> " + s + " " + v + " </apply>" : s); }
 
 Parens = ws "(" ws v:Term_AddSub ws ")"
