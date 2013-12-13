@@ -138,6 +138,10 @@ test("Can parse exp", function() {
     equal(ARTC.txt2Num.parse("exp(10, 2)"), 100);
 });
 
+test("Can parse exp with one value, e is default base", function() {
+    equal(ARTC.txt2Num.parse("exp(2)"), 7.3890560989306495);
+});
+
 test("Can parse e", function() {
     equal(ARTC.txt2Num.parse("e"), Math.E);
 });

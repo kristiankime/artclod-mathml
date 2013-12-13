@@ -42,8 +42,8 @@ Functions = (power / trig)
 
 power = (exp / log / ln)
 
-exp = "exp(" ws b:Term_AddSub ws "," e:Term_AddSub ")"
-  { return Math.pow(b, e); } 
+exp = "exp(" ws b:(Term_AddSub ws ",")? e:Term_AddSub ")"
+  { return Math.pow( (b ? b[0] : Math.E) , e); } 
 
 log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
   { return Math.log(v) / Math.log((b ? b[0] : 10)); } 
@@ -70,7 +70,6 @@ csc = "csc(" v:Term_AddSub ")"
 
 cot = "cot(" v:Term_AddSub ")"
   { return 1/Math.tan(v); }
-
 
 // ==== Primary  ====
 Primary = ws v:(Functions / Parens / Constant / Number / Neg )

@@ -147,6 +147,10 @@ test("Can parse exp", function() {
     equal(ARTC.txt2MathML.parse("exp(10, 2)"), "<math> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </math>");
 });
 
+test("Can parse exp with one value, e is default base", function() {
+    equal(ARTC.txt2MathML.parse("exp(2)"), "<math> <apply> <power/> <exponentiale/> <cn> 2 </cn> </apply> </math>");
+});
+
 test("Can parse e", function() {
     equal(ARTC.txt2MathML.parse("e"), "<math> <exponentiale/> </math>");
 });

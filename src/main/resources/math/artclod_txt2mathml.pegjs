@@ -43,8 +43,8 @@ Functions = (power / trig)
 
 power = (exp / log / ln)
 
-exp = "exp(" ws b:Term_AddSub ws "," e:Term_AddSub ")"
-  { return "<apply> <power/> " + b + " " + e + " </apply>"; }
+exp = "exp(" ws b:(Term_AddSub ws ",")? e:Term_AddSub ")"
+  { return "<apply> <power/> " + (b ? b[0] : "<exponentiale/>") + " " + e + " </apply>"; }
 
 log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
   { return "<apply> <log/> " + (b ? "<logbase> " + b[0] + " </logbase> " : "") + v + " </apply>"; } 

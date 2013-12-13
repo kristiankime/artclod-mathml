@@ -634,8 +634,8 @@ ARTC.txt2Num = (function(){
         }
         
         function parse_exp() {
-          var result0, result1, result2, result3, result4, result5, result6;
-          var pos0, pos1;
+          var result0, result1, result2, result3, result4;
+          var pos0, pos1, pos2;
           
           pos0 = pos;
           pos1 = pos;
@@ -651,6 +651,7 @@ ARTC.txt2Num = (function(){
           if (result0 !== null) {
             result1 = parse_ws();
             if (result1 !== null) {
+              pos2 = pos;
               result2 = parse_Term_AddSub();
               if (result2 !== null) {
                 result3 = parse_ws();
@@ -665,27 +666,34 @@ ARTC.txt2Num = (function(){
                     }
                   }
                   if (result4 !== null) {
-                    result5 = parse_Term_AddSub();
-                    if (result5 !== null) {
-                      if (input.charCodeAt(pos) === 41) {
-                        result6 = ")";
-                        pos++;
-                      } else {
-                        result6 = null;
-                        if (reportFailures === 0) {
-                          matchFailed("\")\"");
-                        }
-                      }
-                      if (result6 !== null) {
-                        result0 = [result0, result1, result2, result3, result4, result5, result6];
-                      } else {
-                        result0 = null;
-                        pos = pos1;
-                      }
-                    } else {
-                      result0 = null;
-                      pos = pos1;
+                    result2 = [result2, result3, result4];
+                  } else {
+                    result2 = null;
+                    pos = pos2;
+                  }
+                } else {
+                  result2 = null;
+                  pos = pos2;
+                }
+              } else {
+                result2 = null;
+                pos = pos2;
+              }
+              result2 = result2 !== null ? result2 : "";
+              if (result2 !== null) {
+                result3 = parse_Term_AddSub();
+                if (result3 !== null) {
+                  if (input.charCodeAt(pos) === 41) {
+                    result4 = ")";
+                    pos++;
+                  } else {
+                    result4 = null;
+                    if (reportFailures === 0) {
+                      matchFailed("\")\"");
                     }
+                  }
+                  if (result4 !== null) {
+                    result0 = [result0, result1, result2, result3, result4];
                   } else {
                     result0 = null;
                     pos = pos1;
@@ -707,7 +715,7 @@ ARTC.txt2Num = (function(){
             pos = pos1;
           }
           if (result0 !== null) {
-            result0 = (function(offset, b, e) { return Math.pow(b, e); })(pos0, result0[2], result0[5]);
+            result0 = (function(offset, b, e) { return Math.pow( (b ? b[0] : Math.E) , e); })(pos0, result0[2], result0[3]);
           }
           if (result0 === null) {
             pos = pos0;
