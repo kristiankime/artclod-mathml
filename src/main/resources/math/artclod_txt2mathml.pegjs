@@ -30,7 +30,7 @@ Exp = "^" ws v:Term_Parens
  
 // =====  Parens Term =====
 Term_Parens = s:Term_Functions ws v:(Parens)*
-  { return (v.length > 0 ? "<apply> <mult/> " + s + " " + v + " </apply>" : s); }
+  { return (v.length > 0 ? "<apply> <times/> " + s + " " + v + " </apply>" : s); }
 
 Parens = ws "(" ws v:Term_AddSub ws ")"
   { return v; }
