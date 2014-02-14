@@ -46,8 +46,13 @@ power = (exp / log / ln)
 exp = "exp(" ws b:(Term_AddSub ws ",")? e:Term_AddSub ")"
   { return "<apply> <power/> " + (b ? b[0] : "<exponentiale/>") + " " + e + " </apply>"; }
 
-log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
-  { return "<apply> <log/> " + (b ? "<logbase> " + b[0] + " </logbase> " : "") + v + " </apply>"; } 
+log = (logParameter / log_)
+
+logParameter = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
+  { return "<apply> <log/> " + (b ? "<logbase> " + b[0] + " </logbase> " : "") + v + " </apply>"; }
+
+log_ = "log_" b:Number "(" ws v:Term_AddSub ")"
+  { return "<apply> <log/> <logbase> " + b + " </logbase> " + v + " </apply>"; }
 
 ln = "ln(" v:Term_AddSub ")"
   { return "<apply> <ln/> " + v + " </apply>"; } 
