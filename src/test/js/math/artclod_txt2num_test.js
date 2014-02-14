@@ -122,12 +122,16 @@ test("2.5e1 + 6.2 = 31.2", function() {
     equal(ARTC.txt2Num.parse("2.5e1 + 6.2"), 31.2);
 });
 
-test("Can parse log", function() {
-    equal(ARTC.txt2Num.parse("log(10, 10)"), 1);
+test("Can parse log with base", function() {
+    equal(ARTC.txt2Num.parse("log(4, 4)"), 1);
 });
 
 test("Can parse log without base (defaults to 10)", function() {
     equal(ARTC.txt2Num.parse("log(10)"), 1);
+});
+
+test("Can parse log with base after _ i.e. log_2(4)", function() {
+    equal(ARTC.txt2Num.parse("log_2(4)"), 2);
 });
 
 test("Can parse ln", function() {

@@ -45,8 +45,13 @@ power = (exp / log / ln)
 exp = "exp(" ws b:(Term_AddSub ws ",")? e:Term_AddSub ")"
   { return Math.pow( (b ? b[0] : Math.E) , e); } 
 
-log = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
-  { return Math.log(v) / Math.log((b ? b[0] : 10)); } 
+log = (logParameter / log_)
+
+logParameter = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
+  { return Math.log(v) / Math.log((b ? b[0] : 10)); }
+
+log_ = "log_" b:Number "(" ws v:Term_AddSub ")"
+  { return Math.log(v) / Math.log(b); }
 
 ln = "ln(" v:Term_AddSub ")"
   { return Math.log(v); }
