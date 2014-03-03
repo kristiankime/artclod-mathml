@@ -182,6 +182,10 @@ test("Can parse symbols and function names", function() {
     equal(ARTC.txt2Num.parse("3*exp(10, 2)"), 300);
 });
 
+test("Can parse function implicit times function", function() {
+    equal(ARTC.txt2Num.parse("cos(pi) cos(2*pi)"), -1);
+});
+
 /*
 test("Can parse power then parens", function() {
     equal(ARTC.txt2Num.parse("2^2(2)"), 8);

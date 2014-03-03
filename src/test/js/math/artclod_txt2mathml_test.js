@@ -191,6 +191,10 @@ test("Can parse symbols and function names", function() {
     equal(ARTC.txt2MathML.parse("3*exp(10, 2)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
+test("Can parse function implicit times function", function() {
+    equal(ARTC.txt2MathML.parse("cos(x) cos(x)"),"<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <apply> <cos/> <ci> x </ci> </apply> <apply> <cos/> <ci> x </ci> </apply> </apply> </math>");
+});
+
 /*
 test("Can parse power then parens", function() {
     equal(ARTC.txt2MathML.parse("2^2(2)"), 8);

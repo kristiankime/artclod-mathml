@@ -671,21 +671,27 @@ ARTC.txt2Num = (function() {
       }
 
       function peg$parseTerm_Functions() {
-        var s0, s1, s2, s3;
+        var s0, s1, s2, s3, s4;
 
         s0 = peg$currPos;
         s1 = peg$parsePrimary();
         if (s1 !== peg$FAILED) {
-          s2 = [];
-          s3 = peg$parseFunctions();
-          while (s3 !== peg$FAILED) {
-            s2.push(s3);
-            s3 = peg$parseFunctions();
-          }
+          s2 = peg$parsews();
           if (s2 !== peg$FAILED) {
-            peg$reportedPos = s0;
-            s1 = peg$c18(s1, s2);
-            s0 = s1;
+            s3 = [];
+            s4 = peg$parseFunctions();
+            while (s4 !== peg$FAILED) {
+              s3.push(s4);
+              s4 = peg$parseFunctions();
+            }
+            if (s3 !== peg$FAILED) {
+              peg$reportedPos = s0;
+              s1 = peg$c18(s1, s3);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$c0;
+            }
           } else {
             peg$currPos = s0;
             s0 = peg$c0;

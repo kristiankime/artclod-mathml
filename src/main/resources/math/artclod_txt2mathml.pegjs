@@ -36,8 +36,8 @@ Parens = ws "(" ws v:Term_AddSub ws ")"
   { return v; }
 
 // ==== Function Terms  ====
-Term_Functions = s:Primary v:(Functions)*
-  { for(var r = s, i=0; i<v.length; i++){ r += v[i]; }; return r; }
+Term_Functions = s:Primary ws v:(Functions)*
+  { return (v.length > 0 ? "<apply> <times/> " + s + " " + v + " </apply>" : s); }
 
 Functions = (power / trig)
 
