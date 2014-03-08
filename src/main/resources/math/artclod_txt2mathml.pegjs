@@ -12,32 +12,32 @@ Sub = "-" ws v:Term_MulDiv
   { return (function(a){return "<apply> <minus/> " + a + " " + v + " </apply>";}) ;} 
  
 // ===== Mult/Div Term =====
-Term_MulDiv = s:Term_Exp ws v:(Mul / Div)*
+Term_MulDiv = s:Term_Exp  v:(Mul / Div)*
   { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
  
-Mul = "*" ws v:Term_Exp
+Mul =  ws "*" ws v:Term_Exp
   { return (function(a){return "<apply> <times/> " + a + " " + v + " </apply>";}) ;}
  
-Div = "/" ws v:Term_Exp
+Div = ws "/" ws v:Term_Exp
   { return (function(a){return "<apply> <divide/> " + a + " " + v + " </apply>";}) ;}
  
 // =====  Exp Term =====
-Term_Exp = s:Term_Parens ws v:(Exp)*
-  { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
- 
-Exp = "^" ws v:Term_Parens
+Term_Exp = s:Term_Parens v:Exp?
+  { return (v ? v(s) : s);}
+
+Exp = ws "^" ws v:Term_Parens
   { return (function(a){return "<apply> <power/> " + a + " " + v + " </apply>";}) ;}
  
 // =====  Parens Term =====
-Term_Parens = s:Term_Functions ws v:(Parens)*
-  { return (v.length > 0 ? "<apply> <times/> " + s + " " + v + " </apply>" : s); }
+Term_Parens = s:(Term_Functions / Parens)
+  { return s; }
 
 Parens = ws "(" ws v:Term_AddSub ws ")"
   { return v; }
 
 // ==== Function Terms  ====
-Term_Functions = s:Primary ws v:(Functions)*
-  { return (v.length > 0 ? "<apply> <times/> " + s + " " + v + " </apply>" : s); }
+Term_Functions = s:(Primary / Functions)
+  { return s; }
 
 Functions = (power / trig)
 
@@ -106,7 +106,7 @@ Floating = i:Integer u:('.' Unsigned )?
 Integer = s:Sign? u:Unsigned
   { return (s ? s : "") + u.join(""); }
 Unsigned = [0-9]+
-Sign = '-' / '+'
+Sign = '-'/'+'
 
 // ==== Whitespace ====
 ws "whitespace"  = [ \t\n\r]*
