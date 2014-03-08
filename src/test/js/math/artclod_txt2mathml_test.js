@@ -220,3 +220,8 @@ test("1 / ((-2*x +3)^5)", function() {
 test("2*x^2 /x, this is here to test parsing the space", function() {
     equal(ARTC.txt2MathML.parse("2*x^2 /x"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <divide/> <apply> <times/> <cn> 2 </cn> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> <ci> x </ci> </apply> </math>');
 });
+
+test("ln( 1 / x + x ^ 2 -9) this is here to test space parsing", function() {
+    equal(ARTC.txt2MathML.parse("ln( 1 / x + x ^ 2 -9)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <ln/> <apply> <minus/> <apply> <plus/> <apply> <divide/> <cn> 1 </cn> <ci> x </ci> </apply> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> <cn> 9 </cn> </apply> </apply> </math>');
+});
+

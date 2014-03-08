@@ -2,13 +2,13 @@ start = v:Term_AddSub
   { return '<math xmlns="http://www.w3.org/1998/Math/MathML"> ' + v + ' </math>'; }
  
 // =====  Add/Sub Term =====
-Term_AddSub = s:Term_MulDiv ws v:(Add / Sub)*
+Term_AddSub = s:Term_MulDiv v:(Add / Sub)*
   { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
  
-Add = "+" ws v:Term_MulDiv
+Add = ws "+" ws v:Term_MulDiv
   { return (function(a){return "<apply> <plus/> " + a + " " + v + " </apply>";}) ;} 
  
-Sub = "-" ws v:Term_MulDiv
+Sub = ws "-" ws v:Term_MulDiv
   { return (function(a){return "<apply> <minus/> " + a + " " + v + " </apply>";}) ;} 
  
 // ===== Mult/Div Term =====
