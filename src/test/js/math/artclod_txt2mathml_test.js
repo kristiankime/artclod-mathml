@@ -215,6 +215,18 @@ test("-x^2: This is here to test that this should be -(x^2)", function() {
     equal(ARTC.txt2MathML.parse("-x^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
+test("-2^x: This is here to test that this should be (-2)^x)", function() {
+    equal(ARTC.txt2MathML.parse("-2^x"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <cn> -2 </cn> <ci> x </ci> </apply> </math>');
+});
+
+test("-3*x^2: This is here to test that this should be -3*(x^2)", function() {
+    equal(ARTC.txt2MathML.parse("-3*x^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> -3 </cn> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </math>');
+});
+
+test("3*x^3 - 2*x^2 + x - 4: This is here to parsing of a simple polynomial", function() {
+    equal(ARTC.txt2MathML.parse("3*x^3 - 2*x^2 + x - 4"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <apply> <plus/> <apply> <minus/> <apply> <times/> <cn> 3 </cn> <apply> <power/> <ci> x </ci> <cn> 3 </cn> </apply> </apply> <apply> <times/> <cn> 2 </cn> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </apply> <ci> x </ci> </apply> <cn> 4 </cn> </apply> </math>');
+});
+
 test("x + 2    : This is here to test that the parser should allow whitespace at the end", function() {
     equal(ARTC.txt2MathML.parse("x + 2    "), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <ci> x </ci> <cn> 2 </cn> </apply> </math>');
 });
