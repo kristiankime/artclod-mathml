@@ -76,7 +76,7 @@ test("(2+2)*8: This is here to test parentheses change order of operations", fun
 });
 
 test("-5: This is here to test - negates number", function() {
-    equal(ARTC.txt2MathML.parse("-5"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <cn> -5 </cn> </math>');
+    equal(ARTC.txt2MathML.parse("-5"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <cn> 5 </cn> </apply> </math>');
 });
 
 test("5+-(5*3): This is here to test - negates arbitrary term", function() {
@@ -84,11 +84,11 @@ test("5+-(5*3): This is here to test - negates arbitrary term", function() {
 });
 
 test("5+-1: This is here to test that we can + a - term", function() {
-    equal(ARTC.txt2MathML.parse("5+-1"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <cn> 5 </cn> <cn> -1 </cn> </apply> </math>');
+    equal(ARTC.txt2MathML.parse("5+-1"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <cn> 5 </cn> <apply> <minus/> <cn> 1 </cn> </apply> </apply> </math>');
 });
 
 test("2--4: This is here to test subtracting a negative number", function() {
-    equal(ARTC.txt2MathML.parse("2--4"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <cn> 2 </cn> <cn> -4 </cn> </apply> </math>');
+    equal(ARTC.txt2MathML.parse("2--4"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <cn> 2 </cn> <apply> <minus/> <cn> 4 </cn> </apply> </apply> </math>');
 });
 
 test("2.4: This is here to test can parse decimals", function() {
@@ -100,7 +100,7 @@ test("2.4e3: This is here to test can parse scientific notation", function() {
 });
 
 test("-2.4e3: This is here to test can parse negatives with scientific notation", function() {
-    equal(ARTC.txt2MathML.parse("-2.4e3"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <cn> -2.4e3 </cn> </math>');
+    equal(ARTC.txt2MathML.parse("-2.4e3"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <cn> 2.4e3 </cn> </apply> </math>');
 });
 
 //test("7(4 + 5): This is here to test can parse number then parens", function() {
@@ -116,7 +116,7 @@ test("-2.4e3: This is here to test can parse negatives with scientific notation"
 //});
 
 test("2^2+(3*(5^(-1*-2))): This is here to test combination of ^ * -", function() {
-    equal(ARTC.txt2MathML.parse("2^2+(3*(5^(-1*-2)))"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <apply> <power/> <cn> 2 </cn> <cn> 2 </cn> </apply> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 5 </cn> <apply> <times/> <cn> -1 </cn> <cn> -2 </cn> </apply> </apply> </apply> </apply> </math>');
+    equal(ARTC.txt2MathML.parse("2^2+(3*(5^(-1*-2)))"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <apply> <power/> <cn> 2 </cn> <cn> 2 </cn> </apply> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 5 </cn> <apply> <times/> <apply> <minus/> <cn> 1 </cn> </apply> <apply> <minus/> <cn> 2 </cn> </apply> </apply> </apply> </apply> </apply> </math>');
 });
 
 test("2.5e1 + 6.2: This is here to test can plus with scientific notation", function() {
@@ -200,7 +200,7 @@ test("5+-(4): This is here to test +- of a non primative", function() {
 });
 
 test("1 / ((-2*x +3)^5): This is here to test", function() {
-    equal(ARTC.txt2MathML.parse("1 / ((-2*x +3)^5)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <divide/> <cn> 1 </cn> <apply> <power/> <apply> <plus/> <apply> <times/> <cn> -2 </cn> <ci> x </ci> </apply> <cn> 3 </cn> </apply> <cn> 5 </cn> </apply> </apply> </math>');
+    equal(ARTC.txt2MathML.parse("1 / ((-2*x +3)^5)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <divide/> <cn> 1 </cn> <apply> <power/> <apply> <plus/> <apply> <times/> <apply> <minus/> <cn> 2 </cn> </apply> <ci> x </ci> </apply> <cn> 3 </cn> </apply> <cn> 5 </cn> </apply> </apply> </math>');
 });
 
 test("2*x^2 /x: This is here to test parsing the space", function() {
@@ -215,12 +215,12 @@ test("-x^2: This is here to test that this should be -(x^2)", function() {
     equal(ARTC.txt2MathML.parse("-x^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
-test("-2^x: This is here to test that this should be (-2)^x)", function() {
-    equal(ARTC.txt2MathML.parse("-2^x"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <cn> -2 </cn> <ci> x </ci> </apply> </math>');
+test("-2^x: This is here to test that this should be -(2^x)", function() {
+    equal(ARTC.txt2MathML.parse("-2^x"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <apply> <power/> <cn> 2 </cn> <ci> x </ci> </apply> </apply> </math>');
 });
 
 test("-3*x^2: This is here to test that this should be -3*(x^2)", function() {
-    equal(ARTC.txt2MathML.parse("-3*x^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> -3 </cn> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </math>');
+    equal(ARTC.txt2MathML.parse("-3*x^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <apply> <minus/> <cn> 3 </cn> </apply> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
 test("3*x^3 - 2*x^2 + x - 4: This is here to parsing of a simple polynomial", function() {

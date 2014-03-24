@@ -54,7 +54,10 @@ ARTC.txt2MathML = (function() {
           peg$c15 = "/",
           peg$c16 = { type: "literal", value: "/", description: "\"/\"" },
           peg$c17 = function(v) { return (function(a){return "<apply> <divide/> " + a + " " + v + " </apply>";}) ;},
-          peg$c18 = function(s, v) { return (v ? v(s) : s);},
+          peg$c18 = function(n, s, v) { 
+              var t = (v ? v(s) : s); 
+              return (n ? "<apply> <minus/> " + t  + " </apply>" : t);
+            },
           peg$c19 = "^",
           peg$c20 = { type: "literal", value: "^", description: "\"^\"" },
           peg$c21 = function(v) { return (function(a){return "<apply> <power/> " + a + " " + v + " </apply>";}) ;},
@@ -546,19 +549,34 @@ ARTC.txt2MathML = (function() {
       }
 
       function peg$parseTerm_Exp() {
-        var s0, s1, s2;
+        var s0, s1, s2, s3;
 
         s0 = peg$currPos;
-        s1 = peg$parseTerm_Parens();
+        if (input.charCodeAt(peg$currPos) === 45) {
+          s1 = peg$c8;
+          peg$currPos++;
+        } else {
+          s1 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c9); }
+        }
+        if (s1 === peg$FAILED) {
+          s1 = peg$c2;
+        }
         if (s1 !== peg$FAILED) {
-          s2 = peg$parseExp();
-          if (s2 === peg$FAILED) {
-            s2 = peg$c2;
-          }
+          s2 = peg$parseTerm_Parens();
           if (s2 !== peg$FAILED) {
-            peg$reportedPos = s0;
-            s1 = peg$c18(s1, s2);
-            s0 = s1;
+            s3 = peg$parseExp();
+            if (s3 === peg$FAILED) {
+              s3 = peg$c2;
+            }
+            if (s3 !== peg$FAILED) {
+              peg$reportedPos = s0;
+              s1 = peg$c18(s1, s2, s3);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$c0;
+            }
           } else {
             peg$currPos = s0;
             s0 = peg$c0;

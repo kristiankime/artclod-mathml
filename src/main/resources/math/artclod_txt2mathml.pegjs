@@ -22,8 +22,11 @@ Div = ws "/" ws v:Term_Exp
   { return (function(a){return "<apply> <divide/> " + a + " " + v + " </apply>";}) ;}
 
 // =====  Exp Term =====
-Term_Exp = s:Term_Parens v:Exp?
-  { return (v ? v(s) : s);}
+Term_Exp = n:("-")? s:Term_Parens v:Exp?
+  { 
+    var t = (v ? v(s) : s); 
+    return (n ? "<apply> <minus/> " + t  + " </apply>" : t);
+  }
 
 Exp = ws "^" ws v:Term_Parens
   { return (function(a){return "<apply> <power/> " + a + " " + v + " </apply>";}) ;}
