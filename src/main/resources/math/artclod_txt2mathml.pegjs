@@ -109,21 +109,3 @@ Sign = '-'/'+'
 // ==== Whitespace ====
 ws "whitespace"  = [ \t\n\r]*
   { return "<exponentiale/>"; }
-
-Pi = ('Pi' / 'pi' )
-  { return "<pi/>"; }
-
-// ==== Numbers ==== 
-Number = s:Scientific
-  { return "<cn> " + s + " </cn>"; }
-Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
-  { return f + (s ? s[0] + s[1]: ""); }
-Floating = i:Integer u:('.' Unsigned )?
-  { return i + (u ? u[0] + u[1].join("") : ""); }
-Integer = s:Sign? u:Unsigned
-  { return (s ? s : "") + u.join(""); }
-Unsigned = [0-9]+
-Sign = '-'/'+'
-
-// ==== Whitespace ====
-ws "whitespace"  = [ \t\n\r]*
