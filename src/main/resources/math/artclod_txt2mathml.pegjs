@@ -42,48 +42,55 @@ Parens = ws "(" ws v:Term_AddSub ws ")"
 Term_Functions = s:(Primary / Functions)
   { return s; }
 
-Functions = (power / trig)
+Functions = (power / trig / root)
 
 power = (exp / log / ln)
 
-exp = "exp(" ws b:(Term_AddSub ws ",")? e:Term_AddSub ")"
+exp = "exp(" ws b:(Term_AddSub ws ",")? e:Term_AddSub ws ")"
   { return "<apply> <power/> " + (b ? b[0] : "<exponentiale/>") + " " + e + " </apply>"; }
 
 log = (logParameter / log_)
 
-logParameter = "log(" ws b:(Number ws ',')? v:Term_AddSub ")"
+logParameter = "log(" ws b:(Number ws ',')? v:Term_AddSub ws ")"
   { return "<apply> <log/> " + (b ? "<logbase> " + b[0] + " </logbase> " : "") + v + " </apply>"; }
 
-log_ = "log_" b:Number "(" ws v:Term_AddSub ")"
+log_ = "log_" b:Number "(" ws v:Term_AddSub ws ")"
   { return "<apply> <log/> <logbase> " + b + " </logbase> " + v + " </apply>"; }
 
-ln = "ln(" v:Term_AddSub ")"
+ln = "ln(" v:Term_AddSub ws ")"
   { return "<apply> <ln/> " + v + " </apply>"; }
 
 trig = (sin / cos / tan / sec / csc / cot)
 
-sin = "sin(" v:Term_AddSub ")"
+sin = "sin(" v:Term_AddSub ws ")"
   { return "<apply> <sin/> " + v + " </apply>"; }
 
-cos = "cos(" v:Term_AddSub ")"
+cos = "cos(" v:Term_AddSub ws ")"
   { return "<apply> <cos/> " + v + " </apply>"; }
 
-tan = "tan(" v:Term_AddSub ")"
+tan = "tan(" v:Term_AddSub ws ")"
   { return "<apply> <tan/> " + v + " </apply>"; }
 
-sec = "sec(" v:Term_AddSub ")"
+sec = "sec(" v:Term_AddSub ws ")"
   { return "<apply> <sec/> " + v + " </apply>"; }
 
-csc = "csc(" v:Term_AddSub ")"
+csc = "csc(" v:Term_AddSub ws ")"
   { return "<apply> <csc/> " + v + " </apply>"; }
 
-cot = "cot(" v:Term_AddSub ")"
+cot = "cot(" v:Term_AddSub ws ")"
   { return "<apply> <cot/> " + v + " </apply>"; }
+
+root = (sqrt / rootN)
+
+sqrt = "sqrt(" v:Term_AddSub ws ")"
+  { return "<apply> <root/> " + v + " </apply>"; }
+
+rootN = "root(" ws n:Number ws ")(" v:Term_AddSub ws ")"
+  { return "<apply> <root/> <degree> " + n + " </degree> " + v + " </apply>"; }
 
 // ==== Primary  ====
 Primary = ws v:(Functions / Parens / Constant / Number /  Variable)
   { return v; }
-
 
 Variable = [xX]
   { return "<ci> x </ci>"; }
@@ -102,11 +109,12 @@ Number = s:Scientific
   { return "<cn> " + s + " </cn>"; }
 Scientific = f:Floating s:( ('e' / 'E' ) Integer )?
   { return f + (s ? s[0] + s[1]: ""); }
-Floating = i:Integer u:('.' Unsigned )?
-  { return i + (u ? u[0] + u[1].join("") : ""); }
+Floating = i:Unsigned u:('.' Unsigned )?
+  { return i + (u ? u[0] + u[1] : ""); }
 Integer = s:Sign? u:Unsigned
-  { return (s ? s : "") + u.join(""); }
-Unsigned = [0-9]+
+  { return (s ? s : "") + u; }
+Unsigned = v:([0-9]+)
+  { return v.join(""); }
 Sign = '-'/'+'
 
 // ==== Whitespace ====

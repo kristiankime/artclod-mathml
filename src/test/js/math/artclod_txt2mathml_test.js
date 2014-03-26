@@ -55,10 +55,6 @@ test("2^4: This is here to test raising a number to a power", function() {
     equal(ARTC.txt2MathML.parse("2^4"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <cn> 2 </cn> <cn> 4 </cn> </apply> </math>');
 });
 
-//test("2^2^4: This is here to test raising a number to a power twice", function() {
-//    equal(ARTC.txt2MathML.parse("2^2^4"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <apply> <power/> <cn> 2 </cn> <cn> 2 </cn> </apply> <cn> 4 </cn> </apply> </math>');
-//});
-
 test("2*4^2: This is here to test powers takes precidence over multiplication", function() {
     equal(ARTC.txt2MathML.parse("2*4^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 2 </cn> <apply> <power/> <cn> 4 </cn> <cn> 2 </cn> </apply> </apply> </math>');
 });
@@ -103,18 +99,6 @@ test("-2.4e3: This is here to test can parse negatives with scientific notation"
     equal(ARTC.txt2MathML.parse("-2.4e3"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <minus/> <cn> 2.4e3 </cn> </apply> </math>');
 });
 
-//test("7(4 + 5): This is here to test can parse number then parens", function() {
-//    equal(ARTC.txt2MathML.parse("7(4 + 5)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 7 </cn> <apply> <plus/> <cn> 4 </cn> <cn> 5 </cn> </apply> </apply> </math>');
-//});
-
-//test("7 (4 + 5): This is here to test can parse number then space then parens", function() {
-//    equal(ARTC.txt2MathML.parse("7 (4 + 5)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 7 </cn> <apply> <plus/> <cn> 4 </cn> <cn> 5 </cn> </apply> </apply> </math>');
-//});
-
-//test("(3 + 6)(4 + 5): This is here to test can parse back to back parens", function() {
-//    equal(ARTC.txt2MathML.parse("(3 + 6)(4 + 5)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <apply> <plus/> <cn> 3 </cn> <cn> 6 </cn> </apply> <apply> <plus/> <cn> 4 </cn> <cn> 5 </cn> </apply> </apply> </math>');
-//});
-
 test("2^2+(3*(5^(-1*-2))): This is here to test combination of ^ * -", function() {
     equal(ARTC.txt2MathML.parse("2^2+(3*(5^(-1*-2)))"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <apply> <power/> <cn> 2 </cn> <cn> 2 </cn> </apply> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 5 </cn> <apply> <times/> <apply> <minus/> <cn> 1 </cn> </apply> <apply> <minus/> <cn> 2 </cn> </apply> </apply> </apply> </apply> </apply> </math>');
 });
@@ -135,8 +119,16 @@ test("log(4, 4): This is here to test can parse log with base", function() {
     equal(ARTC.txt2MathML.parse("log(4, 4)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <log/> <logbase> <cn> 4 </cn> </logbase> <cn> 4 </cn> </apply> </math>');
 });
 
+test("log( 4, 4 ): This is here to test can parse log with base with white space", function() {
+    equal(ARTC.txt2MathML.parse("log( 4, 4 )"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <log/> <logbase> <cn> 4 </cn> </logbase> <cn> 4 </cn> </apply> </math>');
+});
+
 test("log(10): This is here to test can parse log without base (defaults to 10)", function() {
     equal(ARTC.txt2MathML.parse("log(10)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <log/> <cn> 10 </cn> </apply> </math>');
+});
+
+test("log( 10 ): This is here to test can parse log without base (defaults to 10) with whitespce", function() {
+    equal(ARTC.txt2MathML.parse("log( 10 )"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <log/> <cn> 10 </cn> </apply> </math>');
 });
 
 test("log_2(4): This is here to test can parse log with base after _ i.e. log_2(4)", function() {
@@ -187,13 +179,21 @@ test("cot(Pi): This is here to test can parse cot", function() {
     equal(ARTC.txt2MathML.parse("cot(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <cot/> <pi/> </apply> </math>');
 });
 
+test("sqrt(4): This is here to test can parse sqrt", function() {
+    equal(ARTC.txt2MathML.parse("sqrt(4)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <root/> <cn> 4 </cn> </apply> </math>');
+});
+
+test("sqrt( 4 ): This is here to test can parse sqrt with whitespace", function() {
+    equal(ARTC.txt2MathML.parse("sqrt( 4 )"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <root/> <cn> 4 </cn> </apply> </math>');
+});
+
+test("root(3)(9): This is here to test can parse root", function() {
+    equal(ARTC.txt2MathML.parse("root(3)(9)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <root/> <degree> <cn> 3 </cn> </degree> <cn> 9 </cn> </apply> </math>');
+});
+
 test("3*exp(10, 2): This is here to test can parse symbols and function names", function() {
     equal(ARTC.txt2MathML.parse("3*exp(10, 2)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>');
 });
-
-//test("cos(x) cos(x): This is here to test can parse function implicit times function", function() {
-//    equal(ARTC.txt2MathML.parse("cos(x) cos(x)"),"<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <apply> <cos/> <ci> x </ci> </apply> <apply> <cos/> <ci> x </ci> </apply> </apply> </math>");
-//});
 
 test("5+-(4): This is here to test +- of a non primative", function() {
     equal(ARTC.txt2MathML.parse("5+-(4)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <cn> 5 </cn> <apply> <minus/> <cn> 4 </cn> </apply> </apply> </math>');
