@@ -28,8 +28,12 @@ Term_Exp = n:("-")? s:Term_Parens v:Exp?
     return (n ? "<apply> <minus/> " + t  + " </apply>" : t);
   }
 
-Exp = ws "^" ws v:Term_Parens
-  { return (function(a){return "<apply> <power/> " + a + " " + v + " </apply>";}) ;}
+Exp = ws "^" ws n:("-")? ws v:Term_Parens
+  { 
+    var pre = (n ? "<apply> <minus/> " : "" );
+    var post = (n ? " </apply>" : "" );
+    return (function(a){return "<apply> <power/> " + a + " " + pre + v + post + " </apply>";}) ;
+  }
 
 // =====  Parens Term =====
 Term_Parens = s:(Term_Functions / Parens)
