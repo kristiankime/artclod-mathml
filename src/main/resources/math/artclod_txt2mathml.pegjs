@@ -2,8 +2,8 @@ start = v:Term_AddSub ws
   { return '<math xmlns="http://www.w3.org/1998/Math/MathML"> ' + v + ' </math>'; }
 
 // =====  Add/Sub Term =====
-Term_AddSub = s:Term_MulDiv? v:(Add / Sub)*
-  { s1=(s? s: ""); for(var r=s1,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
+Term_AddSub = s:Term_MulDiv v:(Add / Sub)*
+  { for(var r=s,i=0;i<v.length;i++){ r = v[i](r); }; return r;}
 
 Add = ws "+" ws v:Term_MulDiv
   { return (function(a){return "<apply> <plus/> " + (a ? a + " " : "") + v + " </apply>";}) ;}

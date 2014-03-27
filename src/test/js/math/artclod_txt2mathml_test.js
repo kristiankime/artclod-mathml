@@ -223,7 +223,6 @@ test("x^-2: This is here to test that the exponent can be negative", function() 
     equal(ARTC.txt2MathML.parse("x^-2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <ci> x </ci> <apply> <minus/> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
-
 test("-3*x^2: This is here to test that this should be -3*(x^2)", function() {
     equal(ARTC.txt2MathML.parse("-3*x^2"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <apply> <minus/> <cn> 3 </cn> </apply> <apply> <power/> <ci> x </ci> <cn> 2 </cn> </apply> </apply> </math>');
 });
