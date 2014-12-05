@@ -131,16 +131,12 @@ test("log( 10 ): This is here to test can parse log without base (defaults to 10
     equal(ARTC.str2MathML.parse("log( 10 )"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <log/> <cn> 10 </cn> </apply> </math>');
 });
 
-test("log_2(4): This is here to test can parse log with base after _ i.e. log_2(4)", function() {
-    equal(ARTC.str2MathML.parse("log_2(4)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <log/> <logbase> <cn> 2 </cn> </logbase> <cn> 4 </cn> </apply> </math>');
-});
-
 test("ln(10): This is here to test can parse ln", function() {
     equal(ARTC.str2MathML.parse("ln(10)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <ln/> <cn> 10 </cn> </apply> </math>');
 });
 
-test("exp(10, 2): This is here to test can parse exp", function() {
-    equal(ARTC.str2MathML.parse("exp(10, 2)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </math>');
+test("pow(10, 2): This is here to test can parse exp", function() {
+    equal(ARTC.str2MathML.parse("pow(10, 2)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </math>');
 });
 
 test("exp(2): This is here to test can parse exp with one value, e is default base", function() {
@@ -187,12 +183,12 @@ test("sqrt( 4 ): This is here to test can parse sqrt with whitespace", function(
     equal(ARTC.str2MathML.parse("sqrt( 4 )"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <root/> <cn> 4 </cn> </apply> </math>');
 });
 
-test("root(3)(9): This is here to test can parse root", function() {
-    equal(ARTC.str2MathML.parse("root(3)(9)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <root/> <degree> <cn> 3 </cn> </degree> <cn> 9 </cn> </apply> </math>');
+test("nthRoot(9, 3): This is here to test can parse root", function() {
+    equal(ARTC.str2MathML.parse("nthRoot(9, 3)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <root/> <degree> <cn> 3 </cn> </degree> <cn> 9 </cn> </apply> </math>');
 });
 
-test("3*exp(10, 2): This is here to test can parse symbols and function names", function() {
-    equal(ARTC.str2MathML.parse("3*exp(10, 2)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>');
+test("3*pow(10, 2): This is here to test can parse symbols and function names", function() {
+    equal(ARTC.str2MathML.parse("3*pow(10, 2)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
 test("5+-(4): This is here to test +- of a non primative", function() {
