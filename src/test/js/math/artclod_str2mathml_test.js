@@ -152,27 +152,27 @@ test("pi: This is here to test can parse pi", function() {
 });
 
 test("sin(Pi): This is here to test can parse sin", function() {
-    equal(ARTC.str2MathML.parse("sin(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <sin/> <pi/> </apply> </math>');
+    equal(ARTC.str2MathML.parse("sin(pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <sin/> <pi/> </apply> </math>');
 });
 
-test("cos(Pi): This is here to test can parse cos", function() {
-    equal(ARTC.str2MathML.parse("cos(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <cos/> <pi/> </apply> </math>');
+test("cos(pi): This is here to test can parse cos", function() {
+    equal(ARTC.str2MathML.parse("cos(pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <cos/> <pi/> </apply> </math>');
 });
 
-test("tan(Pi): This is here to test can parse tan", function() {
-    equal(ARTC.str2MathML.parse("tan(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <tan/> <pi/> </apply> </math>');
+test("tan(pi): This is here to test can parse tan", function() {
+    equal(ARTC.str2MathML.parse("tan(pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <tan/> <pi/> </apply> </math>');
 });
 
-test("sec(Pi): This is here to test can parse sec", function() {
-    equal(ARTC.str2MathML.parse("sec(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <sec/> <pi/> </apply> </math>');
+test("sec(pi): This is here to test can parse sec", function() {
+    equal(ARTC.str2MathML.parse("sec(pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <sec/> <pi/> </apply> </math>');
 });
 
-test("csc(Pi): This is here to test can parse csc", function() {
-    equal(ARTC.str2MathML.parse("csc(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <csc/> <pi/> </apply> </math>');
+test("csc(pi): This is here to test can parse csc", function() {
+    equal(ARTC.str2MathML.parse("csc(pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <csc/> <pi/> </apply> </math>');
 });
 
-test("cot(Pi): This is here to test can parse cot", function() {
-    equal(ARTC.str2MathML.parse("cot(Pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <cot/> <pi/> </apply> </math>');
+test("cot(pi): This is here to test can parse cot", function() {
+    equal(ARTC.str2MathML.parse("cot(pi)"), '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <cot/> <pi/> </apply> </math>');
 });
 
 test("sqrt(4): This is here to test can parse sqrt", function() {

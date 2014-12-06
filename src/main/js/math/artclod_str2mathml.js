@@ -2,80 +2,103 @@ if(!ARTC){
     var ARTC = {};
 }
 
-ARTC.str2MathML = (function() {
-    // ============== Operator Support ===========
-    var opMap = ARTC.argMapCreate({
+ARTC.mathJSDefaults = {
+    // All functions here take (node, parseNode)
+    functions: {
+        "cos#1"     : function(n, pN){ return "<apply> <cos/> " + pN(n.args[0]) + " </apply>"; },
+        "sin#1"     : function(n, pN){ return "<apply> <sin/> " + pN(n.args[0]) + " </apply>"; },
+        "tan#1"     : function(n, pN){ return "<apply> <tan/> " + pN(n.args[0]) + " </apply>"; },
+        "sec#1"     : function(n, pN){ return "<apply> <sec/> " + pN(n.args[0]) + " </apply>"; },
+        "csc#1"     : function(n, pN){ return "<apply> <csc/> " + pN(n.args[0]) + " </apply>"; },
+        "cot#1"     : function(n, pN){ return "<apply> <cot/> " + pN(n.args[0]) + " </apply>"; },
+        "sqrt#1"    : function(n, pN){ return "<apply> <root/> " + pN(n.args[0]) + " </apply>"; },
+        "nthRoot#2" : function(n, pN){ return "<apply> <root/> <degree> " + pN(n.args[1]) + " </degree> " + pN(n.args[0]) + " </apply>"; },
+        "ln#1"      : function(n, pN){ return "<apply> <ln/> " + pN(n.args[0]) + " </apply>"; },
+        "log#1"     : function(n, pN){ return "<apply> <log/> " + pN(n.args[0]) + " </apply>"; },
+        "log#2"     : function(n, pN){ return "<apply> <log/> <logbase> " + pN(n.args[1]) + " </logbase> " + pN(n.args[0]) + " </apply>"; },
+        "pow#2"     : function(n, pN){ return "<apply> <power/> " + pN(n.args[0]) + " " + pN(n.args[1]) + " </apply>"; },
+        "exp#1"     : function(n, pN){ return "<apply> <power/> <exponentiale/> " + pN(n.args[0]) + " </apply>"; }
+    },
+    operators : {
         "+" : "<plus/>",
         "-" : "<minus/>",
         "*" : "<times/>",
         "/" : "<divide/>",
         "^" : "<power/>"
-    })
+    },
+    symbols : {
+        map: {
+            "pi": "<pi/>",
+            "e": "<exponentiale/>",
+            "x": "<ci> x </ci>"
+        },
+        allowAny : false
 
-    var operatorNodeFunction = function(node){
-        var ret = "<apply> " + opMap(node.op) + " ";
-        var len = node.args.length;
+    }
+}
+
+ARTC.mathJS = (function(){
+    var applyWrap = function(operator, elements, parseNode) {
+        var ret = "<apply> " + operator + " ";
+        var len = elements.length;
         for (var i = 0; i < len; i++) {
-            var n = node.args[i];
+            var n = elements[i];
             ret += parseNode(n) + " ";
         }
         ret += "</apply>";
         return ret;
     }
 
-    // ============== Function Support ===========
-    var fnMap = ARTC.argMapCreate({
-        "cos#1"  : function(node){ return "<cos/> " + parseNode(node.args[0]); },
-        "sin#1"  : function(node){ return "<sin/> " + parseNode(node.args[0]); },
-        "tan#1"  : function(node){ return "<tan/> " + parseNode(node.args[0]); },
-        "sec#1"  : function(node){ return "<sec/> " + parseNode(node.args[0]); },
-        "csc#1"  : function(node){ return "<csc/> " + parseNode(node.args[0]); },
-        "cot#1"  : function(node){ return "<cot/> " + parseNode(node.args[0]); },
-        "sqrt#1"  : function(node){ return "<root/> " + parseNode(node.args[0]); },
-        "nthRoot#2"  : function(node){ return "<root/> <degree> " + parseNode(node.args[1]) + " </degree> " + parseNode(node.args[0]); },
-        // "ln#1"  : function(node){ return "<ln/> " + parseNode(node.args[0]); },
-        // "ln#1"  : function(node){ return "<ln/> " + parseNode(node.args[0]); },
-        // "ln#1"  : function(node){ return "<ln/> " + parseNode(node.args[0]); },
-        // "ln#1"  : function(node){ return "<ln/> " + parseNode(node.args[0]); },
-        "ln#1"  : function(node){ return "<ln/> " + parseNode(node.args[0]); },
-        "log#1" : function(node){ return "<log/> " + parseNode(node.args[0]); },
-        "log#2" : function(node){ return "<log/> <logbase> " + parseNode(node.args[1]) + " </logbase> " + parseNode(node.args[0]); },
-        "pow#2" : function(node){ return "<power/> " + parseNode(node.args[0]) + " " + parseNode(node.args[1]); },
-        "exp#1" : function(node){ return "<power/> <exponentiale/> " + parseNode(node.args[0]); }
-    })
+    // What's stores in ARTC.MathJS is function that creates a
+    return function(functions, operators, symbols){
+        // ==============  Function Handling ==============
+        var fncMap = ARTC.argMapCreate(functions);
 
-    var functionNodeFunction = function(node){
-        var fnc = fnMap(node.name, node.args.length)
-        if(!fnc) { throw "Error finding function for FunctionNode with name " + node.name }
-        return "<apply> " + fnc(node) + " </apply>";
-    }
-
-    // ============== Symbol Support ===========
-    var symbolNodeFunction = function(node){
-        switch (node.name) {
-            case 'Pi': return "<pi/>";
-            case 'pi': return "<pi/>";
-            case 'e': return "<exponentiale/>";
-            default: return "<ci> " + node.name + " </ci>";
+        var functionNodeFunction = function(node){
+            var fnc = fncMap(node.name, node.args.length)
+            if(!fnc) { throw "Error finding function for FunctionNode with name " + node.name + " and # args = " + node.args.length}
+            return fnc(node, parseNode);
         }
-    }
 
-    // ============== Full Parsing ===========
-    var parseNode = function(node) {
-        switch (node.type) {
-            case 'OperatorNode': return operatorNodeFunction(node);
-            case 'ConstantNode': return "<cn> " + node.value + " </cn>"; // TODO parse down to cn type here
-            case 'SymbolNode': return symbolNodeFunction(node);
-            case 'FunctionNode': return functionNodeFunction(node);
-            default: return 'Default' + node;
+        // ==============  Operator Handling ==============
+        var opMap = ARTC.argMapCreate(operators);
+
+        var operatorNodeFunction = function(node){
+            var op = opMap(node.op)
+            if(!op) { throw "Error finding operator for OperatorNode with op " + node.op }
+            return applyWrap(op, node.args, parseNode);
         }
-    }
 
-    var parse = function(string) {
-        return '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> ' + parseNode(math.parse(string)) + ' </math>';
-    }
+        // ============== Symbol Handling ===========
+        var symMap = ARTC.argMapCreate(symbols.map);
 
-    return {
-        parse: parse
-    };
+        var symbolNodeFunction = function(node){
+            var sym = symMap(node.name)
+            if(sym) { return sym }
+            if(!sym && !symbols.allowAny){ throw "Error in SymbolNode, any not allowed, and nothing specified for " + node.name }
+            return "<ci> " + node.name + " </ci>";
+        }
+
+        // ============== Full Parsing ===========
+        var parseNode = function(node) {
+            switch (node.type) {
+                case 'OperatorNode': return operatorNodeFunction(node);
+                case 'ConstantNode': return "<cn> " + node.value + " </cn>"; // TODO parse down to cn type here
+                case 'SymbolNode':   return symbolNodeFunction(node);
+                case 'FunctionNode': return functionNodeFunction(node);
+                default:             throw "Error, unknown node type " + node;
+            }
+        }
+
+        var parse = function(string) {
+            return '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> ' + parseNode(math.parse(string)) + ' </math>';
+        }
+
+        return parse;
+    }
+}());
+
+ARTC.str2MathML = (function() {
+    var parse = ARTC.mathJS(ARTC.mathJSDefaults.functions, ARTC.mathJSDefaults.operators, ARTC.mathJSDefaults.symbols);
+    return { parse : parse}
 }());
