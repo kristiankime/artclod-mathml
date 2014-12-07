@@ -56,7 +56,7 @@ ARTC.mathJS = (function(){
 
         var functionNodeFunction = function(node){
             var fnc = fncMap(node.name, node.args.length)
-            if(!fnc) { throw "Error finding function for FunctionNode with name " + node.name + " and # args = " + node.args.length}
+            if(!fnc) { throw { msg: "Error finding function for FunctionNode with name " + node.name + " and # args = " + node.args.length} }
             return fnc(node, parseNode);
         }
 
@@ -65,7 +65,7 @@ ARTC.mathJS = (function(){
 
         var operatorNodeFunction = function(node){
             var op = opMap(node.op)
-            if(!op) { throw "Error finding operator for OperatorNode with op " + node.op }
+            if(!op) { throw { msg: "Error finding operator for OperatorNode with op " + node.op } }
             return applyWrap(op, node.args, parseNode);
         }
 
@@ -75,7 +75,7 @@ ARTC.mathJS = (function(){
         var symbolNodeFunction = function(node){
             var sym = symMap(node.name)
             if(sym) { return sym }
-            if(!sym && !symbols.allowAny){ throw "Error in SymbolNode, any not allowed, and nothing specified for " + node.name }
+            if(!sym && !symbols.allowAny){ throw { mag: "Error in SymbolNode, any not allowed, and nothing specified for " + node.name } }
             return "<ci> " + node.name + " </ci>";
         }
 
@@ -86,7 +86,7 @@ ARTC.mathJS = (function(){
                 case 'ConstantNode': return "<cn> " + node.value + " </cn>"; // TODO parse down to cn type here
                 case 'SymbolNode':   return symbolNodeFunction(node);
                 case 'FunctionNode': return functionNodeFunction(node);
-                default:             throw "Error, unknown node type " + node;
+                default:             throw { msg: "Error, unknown node type " + node };
             }
         }
 

@@ -3,64 +3,80 @@ if (!ARTC) {
 }
 
 
-/*
- * Duplicate of underscore code as not to import an entire library for one function.
- */
-ARTC.isFunction = function(obj) {
-    return !!(obj && obj.constructor && obj.call && obj.apply);
-};
+// Duplicate of underscore code as not to import an entire library for one function.
+ARTC.isFunction = function(obj) { return !!(obj && obj.constructor && obj.call && obj.apply); };
 
-/*
- * Update an HTML element with a string in content MathML format and then have MathJax render it.
- * 
- * NOTE: This function will overwrite the inner HTML of an element.
- * 
- * This functional is designed not to throw any errors but to call a callback function
- * with a status object indicating success or failure. If no callback is given errors are ignored.
- * 
- * The error object has three attributes
- * 
- * success - a boolean indicating if everything went well
- * reason - a string which can be one of:
- *          "success" -> Indicating success, this is the only string where the success attribute will be true
- *          "id falsey" -> The id was falsey
- *          "mathMLStr falsey" -> The mathMLStr was falsey
- *          "parse error" -> The mathMLStr could not be parsed by ARTC.txt2MathML.parse 
- *          "invalid id" -> Could not find an element associated with the given id 
- * details - an empty string on success or an error object given more details about the failure
- */ 
-ARTC.updateContentMathML = function(id, mathMLStr, callback) {
-    var safeCallback = function() {/* noop */;};
-    if(ARTC.isFunction(callback)){
-	safeCallback = callback;
+
+ARTC.mathJax = (function() {
+
+    /*
+     * Wrapper functions for "math" values that are put into the update function
+     */
+    var tex = function(tex){ return '$$' + tex + '$$'; };
+    var asccii = function(asciimath){ return '`' + asciimath + '`'; };
+    var mathml = function(mathML){ return '<script type="math\/mml"> ' + mathML + ' <\/script>'; };
+
+    /*
+     * Update an HTML element with a string in content MathML format and then have MathJax render it.
+     *
+     * NOTE: This function will overwrite the inner HTML of an element.
+     *
+     * This functional is designed not to throw any errors but to call a callback function
+     * with a status object indicating success or failure. If no callback is given errors are ignored.
+     *
+     * Arguments
+     *   id - The id of the element to update
+     *   math - The Math to put into the element. this will replace the innerHTML of the element so it must
+     *          be something that MathJax can process.
+     *          For convenience ARTC.mathJax.tex will wrap TeX properly,
+     *          ARTC.mathJax.asccii will wrap AsciiMath
+     *          ARTC.mathJax.mathml will wrap MathML (Presentation or Conent)
+     *   callback - function that will be called after the updated completes, it is called with finished object
+     *
+     * The finished object has three attributes
+     *
+     * success - a boolean indicating if everything went well
+     * reason - a string which can be one of:
+     *          "success" -> Indicating success, this is the only string where the success attribute will be true
+     *          "id falsey" -> The id was falsey
+     *          "math falsey" -> The math was falsey
+     *          "invalid id" -> Could not find an element associated with the given id
+     * details - an empty string on success or an error object given more details about the failure
+     */
+    var update = function (id, math, callback) {
+        var safeCallback = function () {  /* noop */; };
+        if (ARTC.isFunction(callback)) {
+            safeCallback = callback;
+        }
+
+        if (!id) {
+            safeCallback({ success: false, reason: "id falsey", details: "id was " + id });
+            return;
+        }
+
+        if (!math) {
+            safeCallback({ success: false, reason: "math falsey", details: "math was " + math });
+            return;
+        }
+
+        var elem = document.getElementById(id);
+        if (elem === null) {
+            safeCallback({ success: false, reason: "invalid id", details: "could not find element for id " + id });
+            return;
+        }
+
+        elem.innerHTML = math
+
+        MathJax.Hub.queue.Push(
+            MathJax.Hub.Queue([ "Typeset", MathJax.Hub, id ]),
+            function () { safeCallback({ success: true, reason: "success", details: "" }); }
+        );
     }
-    
-    if (!id) {
-	safeCallback({ success : false, reason : "id falsey", details : id });
-	return;
-    } else if (!mathMLStr) {
-	safeCallback({ success : false, reason : "mathMLStr falsey", details : mathMLStr });
-	return;
+
+    return {
+        update : update,
+        tex: tex,
+        asccii: asccii,
+        mathml: mathml
     }
-
-    var mathML = null;
-    try {
-	mathML = ARTC.txt2MathML.parse(mathMLStr);
-    } catch (e) {
-	safeCallback({ success : false, reason : "parse error", details : e });
-	return;
-    }
-
-    var elem = document.getElementById(id);
-    if (elem === null) {
-	safeCallback({ success : false, reason : "invalid id", details : id });
-	return;
-    }
-
-    elem.innerHTML = '<script type="math\/mml"> <math> ' + mathML + ' <\/math> <\/script>';
-
-    MathJax.Hub.queue.Push(
-	    MathJax.Hub.Queue([ "Typeset", MathJax.Hub, id ]),
-	    function(){ safeCallback({ success : true, reason : "success", details : "" }); }
-	    );
-};
+}());
