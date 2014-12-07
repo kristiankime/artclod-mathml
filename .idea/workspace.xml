@@ -79,20 +79,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="artclod_mathml_utils_manual_test.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="artclod_mathml_utils_manual_test.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_manual_test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="810">
+            <state vertical-scroll-proportion="0.4806071" vertical-offset="0" max-vertical-offset="810">
               <caret line="19" column="71" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="artclod_mathml_utils_test.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="artclod_mathml_utils_test.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3809524" vertical-offset="0" max-vertical-offset="630">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
               <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
               <folding />
             </state>
@@ -526,12 +526,12 @@
       <created>1417571663771</created>
       <updated>1417571663771</updated>
       <workItem from="1417571665493" duration="11686000" />
-      <workItem from="1417821182517" duration="14922000" />
+      <workItem from="1417821182517" duration="14945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26608000" />
+    <option name="totallyTimeSpent" value="26631000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
@@ -727,14 +727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_manual_test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="810">
-          <caret line="19" column="71" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
@@ -745,8 +737,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3809524" vertical-offset="0" max-vertical-offset="630">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
           <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_manual_test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4806071" vertical-offset="0" max-vertical-offset="810">
+          <caret line="19" column="71" selection-start-line="19" selection-start-column="57" selection-end-line="19" selection-end-column="71" />
           <folding />
         </state>
       </provider>
