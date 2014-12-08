@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MathML Util Tests</title>
+  <script src="../../../main/js/math/artclod_mathml_utils.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      MathML: {
+        extensions: ["content-mathml.js"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML"> </script>
+</head>
+<body>
+
+    <!-- AsciiMath example in this section -->
+    <section>
+        Type some <a href="http://asciimath.org/">AsciiMath</a> here: <br>
+        <input id="asciiInput" type="text" size="40" onkeyup="asciiMathJax(this.value)" onpaste="asciiMathJax(this.value)" oninput="asciiMathJax(this.value)"/> <br>
+        <span id="asciiOutput"> `` </span>
+        <script>
+            var asciiMathJax = function(math){
+                ARTC.mathJax.update("asciiOutput", ARTC.mathJax.asccii(math));
+            };
+            // Set initial Value
+            var initialValue = 'x ^ 2';
+            document.getElementById('asciiInput').value = initialValue;
+            asciiMathJax(initialValue);
+        </script>
+    </section>
+
+    <br>
+    <br>
+
+    <!-- MathML example in this section -->
+    <section>
+        Type some <a href="http://www.w3.org/Math/">MathML</a> (Presentation or Content) here: <br>
+        <input id="mathMLInput" type="text"  size="200" onkeyup="mathMLMathJax(this.value)" onpaste="mathMLMathJax(this.value)" oninput="mathMLMathJax(this.value)"/> <br>
+        <span id="mathMLOutput"> <script type="math/mml"> </script> </span>
+        <script>
+            var mathMLMathJax = function(math){
+                ARTC.mathJax.update("mathMLOutput", ARTC.mathJax.mathml(math));
+            };
+            // Set initial Value
+            var initialValue = '<math xmlns="http://www.w3.org/1998/Math/MathML"> <apply> <power/> <ci> x </ci> <cn>2</cn> </apply> </math>';
+            document.getElementById('mathMLInput').value = initialValue;
+            mathMLMathJax(initialValue);
+        </script>
+    </section>
+
+    <br>
+    <br>
+
+    <!-- TeX example in this section -->
+    <section>
+        Type some TeX or <a href="http://www.latex-project.org/">LaTeX</a> here: <br>
+        <input id="texInput" type="text" size="40" onkeyup="texMathJax(this.value)" onpaste="texMathJax(this.value)" oninput="texMathJax(this.value)"/> <br>
+        <span id="texOutput"> $$$$ </span>
+        <script>
+            var texMathJax = function(math){
+                ARTC.mathJax.update("texOutput", ARTC.mathJax.tex(math));
+            };
+            // Set initial Value
+            var initialValue = 'x ^ 2';
+            document.getElementById('texInput').value = initialValue;
+            texMathJax(initialValue);
+        </script>
+    </section>
+
+</body>
+</html>

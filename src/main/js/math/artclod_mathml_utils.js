@@ -3,11 +3,9 @@ if (!ARTC) {
 }
 
 
-// Duplicate of underscore code as not to import an entire library for one function.
-ARTC.isFunction = function(obj) { return !!(obj && obj.constructor && obj.call && obj.apply); };
-
-
 ARTC.mathJax = (function() {
+    // Duplicate of underscore code so as not to import an entire library for one function.
+    var isFunction = function(obj) { return !!(obj && obj.constructor && obj.call && obj.apply); };
 
     /*
      * Wrapper functions for "math" values that are put into the update function
@@ -45,7 +43,7 @@ ARTC.mathJax = (function() {
      */
     var update = function (id, math, callback) {
         var safeCallback = function () {  /* noop */; };
-        if (ARTC.isFunction(callback)) {
+        if (isFunction(callback)) {
             safeCallback = callback;
         }
 
