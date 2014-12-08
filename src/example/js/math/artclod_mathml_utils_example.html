@@ -25,7 +25,7 @@
     <section>
         Type some <a href="http://asciimath.org/">AsciiMath</a> here: <br>
         <input id="asciiInput" type="text" size="40" onkeyup="asciiMathJax(this.value)" onpaste="asciiMathJax(this.value)" oninput="asciiMathJax(this.value)"/> <br>
-        <span id="asciiOutput"> `` </span>
+        <span id="asciiOutput"> ` ` </span>
         <script>
             var asciiMathJax = function(math){
                 ARTC.mathJax.update("asciiOutput", ARTC.mathJax.asccii(math));
@@ -55,9 +55,9 @@
 
     <!-- TeX example in this section -->
     <section>
-        Type some TeX or <a href="http://www.latex-project.org/">LaTeX</a> here: <br>
+        Type some <a href="http://en.wikipedia.org/wiki/TeX">TeX</a> or <a href="http://www.latex-project.org/">LaTeX</a> here: <br>
         <input id="texInput" type="text" size="40" onkeyup="texMathJax(this.value)" onpaste="texMathJax(this.value)" oninput="texMathJax(this.value)"/> <br>
-        <span id="texOutput"> $$$$ </span>
+        <span id="texOutput"> $$ $$ </span>
         <script>
             var texMathJax = function(math){
                 ARTC.mathJax.update("texOutput", ARTC.mathJax.tex(math));
