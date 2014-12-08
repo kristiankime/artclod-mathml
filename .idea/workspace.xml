@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65f78998-e0c7-4426-9d9e-753cefc1be6d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/example/js/math/artclod_mathml_utils_example.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/js/math/artclod_mathml_utils_manual_test.html" afterPath="$PROJECT_DIR$/src/example/js/math/artclod_mathjs_example.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/js/math/artclod_mathml_utils.js" afterPath="$PROJECT_DIR$/src/main/js/math/artclod_mathml_utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/example/js/math/artclod_mathml_utils_example.html" afterPath="$PROJECT_DIR$/src/example/js/math/artclod_mathml_utils_example.html" />
     </list>
     <ignored path="artclod-mathml.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,7 +68,7 @@
       <file leaf-file-name="artclod_mathjs_example.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod_mathjs_example.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="585">
+            <state vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="585">
               <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
               <folding />
             </state>
@@ -81,8 +78,8 @@
       <file leaf-file-name="artclod_mathml_utils_example.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod_mathml_utils_example.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6964587" vertical-offset="577" max-vertical-offset="1170">
-              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.7217538" vertical-offset="532" max-vertical-offset="1125">
+              <caret line="64" column="64" selection-start-line="64" selection-start-column="64" selection-end-line="64" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -533,12 +530,12 @@
       <created>1417571663771</created>
       <updated>1417571663771</updated>
       <workItem from="1417571665493" duration="11686000" />
-      <workItem from="1417821182517" duration="17541000" />
+      <workItem from="1417821182517" duration="17919000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29227000" />
+    <option name="totallyTimeSpent" value="29605000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
@@ -752,7 +749,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod_mathjs_example.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="585">
+        <state vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="585">
           <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
           <folding />
         </state>
@@ -760,8 +757,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod_mathml_utils_example.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6964587" vertical-offset="577" max-vertical-offset="1170">
-          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.7217538" vertical-offset="532" max-vertical-offset="1125">
+          <caret line="64" column="64" selection-start-line="64" selection-start-column="64" selection-end-line="64" selection-end-column="64" />
           <folding />
         </state>
       </provider>

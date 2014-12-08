@@ -14,6 +14,12 @@
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML"> </script>
 </head>
 <body>
+    <script>
+        var updateInitialValue = function(initialValue, id, func) {
+            document.getElementById(id).value = initialValue;
+            func(initialValue);
+        }
+    </script>
 
     <!-- AsciiMath example in this section -->
     <section>
@@ -24,10 +30,7 @@
             var asciiMathJax = function(math){
                 ARTC.mathJax.update("asciiOutput", ARTC.mathJax.asccii(math));
             };
-            // Set initial Value
-            var initialValue = 'x ^ 2';
-            document.getElementById('asciiInput').value = initialValue;
-            asciiMathJax(initialValue);
+            updateInitialValue('x ^ 2', 'asciiInput', asciiMathJax);
         </script>
     </section>
 
@@ -43,10 +46,7 @@
             var mathMLMathJax = function(math){
                 ARTC.mathJax.update("mathMLOutput", ARTC.mathJax.mathml(math));
             };
-            // Set initial Value
-            var initialValue = '<math xmlns="http://www.w3.org/1998/Math/MathML"> <apply> <power/> <ci> x </ci> <cn>2</cn> </apply> </math>';
-            document.getElementById('mathMLInput').value = initialValue;
-            mathMLMathJax(initialValue);
+            updateInitialValue('<math xmlns="http://www.w3.org/1998/Math/MathML"> <apply> <power/> <ci> x </ci> <cn>2</cn> </apply> </math>', 'mathMLInput', mathMLMathJax);
         </script>
     </section>
 
@@ -62,10 +62,7 @@
             var texMathJax = function(math){
                 ARTC.mathJax.update("texOutput", ARTC.mathJax.tex(math));
             };
-            // Set initial Value
-            var initialValue = 'x ^ 2';
-            document.getElementById('texInput').value = initialValue;
-            texMathJax(initialValue);
+            updateInitialValue('x ^ 2', 'texInput', texMathJax);
         </script>
     </section>
 
