@@ -3,10 +3,10 @@ if(!ARTC){
 }
 
 /*
- * ARTC.mathJS is a builder for parsers.
- * The main goal of these parsers take a MathJS style string as input and output Content MathML.
+ * ARTC.buildMathJSParser is a builder for parsers.
+ * The main goal of these parsers turn a MathJS style string into Content MathML.
  *
- * ARTC.mathJS requires an "function", "operator" and "symbol" map.
+ * ARTC.buildMathJSParser requires an "function", "operator" and "symbol" map.
  * These maps specify which subset of MathJS is legal in the parser and what content MathML the Mathjs should map to.
  * See ARTC.mathJSDefaults for example of these maps.
  *
@@ -18,7 +18,7 @@ if(!ARTC){
  *   error: an empty object on success or the error on failure
  * }
  */
-ARTC.mathJS = (function(){
+ARTC.buildMathJSParser = (function(){
     var applyWrap = function(operator, elements, parseNode) {
         var ret = "<apply> " + operator + " ";
         var len = elements.length;
@@ -105,7 +105,7 @@ ARTC.mathJS = (function(){
 }());
 
 /*
- * Helpful defaults for user with ARTC.mathJS
+ * Helpful defaults for user with ARTC.buildMathJSParser
  */
 ARTC.mathJSDefaults = {
     // All functions here take (node, parseNode)
@@ -143,9 +143,5 @@ ARTC.mathJSDefaults = {
     }
 
 }
-
-ARTC.str2MathML = (function() {
-    return { parse : ARTC.mathJS()}
-}());
 
 
