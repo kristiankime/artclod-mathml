@@ -2,6 +2,10 @@ if(!ARTC){
     var ARTC = {};
 }
 
+if(!ARTC.mathJS){
+    ARTC.mathJS = {};
+}
+
 /*
  * ARTC.buildMathJSParser is a builder for parsers.
  * The main goal of these parsers turn a MathJS style string into Content MathML.
@@ -18,7 +22,7 @@ if(!ARTC){
  *   error: an empty object on success or the error on failure
  * }
  */
-ARTC.buildMathJSParser = (function(){
+ARTC.mathJS.buildParser = (function(){
     var applyWrap = function(operator, elements, parseNode) {
         var ret = "<apply> " + operator + " ";
         var len = elements.length;
@@ -32,13 +36,13 @@ ARTC.buildMathJSParser = (function(){
 
     return function(functions, operators, symbols){
         // If we don't have values passed in use defaults
-        var functionsSafe = ARTC.mathJSDefaults.functions;
+        var functionsSafe = ARTC.mathJS.parserDefaults.functions;
         if(functions){ functionsSafe = functions; }
 
-        var operatorsSafe = ARTC.mathJSDefaults.operators;
+        var operatorsSafe = ARTC.mathJS.parserDefaults.operators;
         if(operators){ operatorsSafe = operators; }
 
-        var symbolsSafe = ARTC.mathJSDefaults.symbols;
+        var symbolsSafe = ARTC.mathJS.parserDefaults.symbols;
         if(symbols){ symbolsSafe = symbols; }
 
         // ==============  Function Handling ==============
@@ -107,7 +111,7 @@ ARTC.buildMathJSParser = (function(){
 /*
  * Helpful defaults for user with ARTC.buildMathJSParser
  */
-ARTC.mathJSDefaults = {
+ARTC.mathJS.parserDefaults = {
     // All functions here take (node, parseNode)
     functions: {
         "cos#1"     : function(n, pN){ return "<apply> <cos/> " + pN(n.args[0]) + " </apply>"; },
