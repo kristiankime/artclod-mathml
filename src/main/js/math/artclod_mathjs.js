@@ -23,6 +23,20 @@ if(!ARTC.mathJS){
  * }
  */
 ARTC.mathJS.buildParser = (function(){
+    // Copied from artclod_arg_map.js so as to not require an import
+    var argMapCreate = function(map) {
+        return function (key, num_args) {
+            if (typeof num_args !== 'undefined') {
+                var argsKey = key + "#" + num_args
+                if (map.hasOwnProperty(argsKey)) {
+                    return map[argsKey];
+                }
+            }
+            return map[key];
+        };
+    }
+
+    // Put <apply> tag around elements
     var applyWrap = function(operator, elements, parseNode) {
         var ret = "<apply> " + operator + " ";
         var len = elements.length;
@@ -34,6 +48,7 @@ ARTC.mathJS.buildParser = (function(){
         return ret;
     }
 
+    // The main function
     return function(functions, operators, symbols){
         // If we don't have values passed in use defaults
         var functionsSafe = ARTC.mathJS.parserDefaults.functions;
@@ -46,7 +61,7 @@ ARTC.mathJS.buildParser = (function(){
         if(symbols){ symbolsSafe = symbols; }
 
         // ==============  Function Handling ==============
-        var fncMap = ARTC.argMapCreate(functionsSafe);
+        var fncMap = argMapCreate(functionsSafe);
 
         var functionNodeFunction = function(node){
             var fnc = fncMap(node.name, node.args.length)
@@ -55,7 +70,7 @@ ARTC.mathJS.buildParser = (function(){
         }
 
         // ==============  Operator Handling ==============
-        var opMap = ARTC.argMapCreate(operatorsSafe);
+        var opMap = argMapCreate(operatorsSafe);
 
         var operatorNodeFunction = function(node){
             var op = opMap(node.op)
@@ -64,7 +79,7 @@ ARTC.mathJS.buildParser = (function(){
         }
 
         // ============== Symbol Handling ===========
-        var symMap = ARTC.argMapCreate(symbolsSafe.map);
+        var symMap = argMapCreate(symbolsSafe.map);
 
         var symbolNodeFunction = function(node){
             var sym = symMap(node.name)
@@ -84,7 +99,7 @@ ARTC.mathJS.buildParser = (function(){
             }
         }
 
-        var parse = function(string) {
+        return function(string) {
             try {
                 var mathJSNode = math.parse(string);
 
@@ -94,7 +109,7 @@ ARTC.mathJS.buildParser = (function(){
                     mathJSNode: mathJSNode,
                     error: {}
                 };
-            } catch(e) {
+            } catch (e) {
                 return {
                     success: false,
                     content: "",
@@ -102,14 +117,12 @@ ARTC.mathJS.buildParser = (function(){
                     error: e
                 }
             }
-         }
-
-        return parse;
+        }
     }
 }());
 
 /*
- * Helpful defaults for user with ARTC.buildMathJSParser
+ * Helpful defaults for use with ARTC.buildMathJSParser
  */
 ARTC.mathJS.parserDefaults = {
     // All functions here take (node, parseNode)
@@ -128,7 +141,6 @@ ARTC.mathJS.parserDefaults = {
         "pow#2"     : function(n, pN){ return "<apply> <power/> " + pN(n.args[0]) + " " + pN(n.args[1]) + " </apply>"; },
         "exp#1"     : function(n, pN){ return "<apply> <power/> <exponentiale/> " + pN(n.args[0]) + " </apply>"; }
     },
-
     operators : {
         "+" : "<plus/>",
         "-" : "<minus/>",
@@ -136,7 +148,6 @@ ARTC.mathJS.parserDefaults = {
         "/" : "<divide/>",
         "^" : "<power/>"
     },
-
     symbols : {
         map: {
             "pi": "<pi/>",
@@ -145,7 +156,7 @@ ARTC.mathJS.parserDefaults = {
         },
         allowAny : false
     }
+};
 
-}
 
-
+ARTC.mathJS.defaultParser = ARTC.mathJS.buildParser();
