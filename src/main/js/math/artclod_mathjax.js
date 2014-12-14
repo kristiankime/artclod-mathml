@@ -2,17 +2,21 @@ if (!ARTC) {
     var ARTC = {};
 }
 
+if(!ARTC.mathJax) {
+    ARTC.mathJax = {};
+}
 
-ARTC.mathJax = (function() {
+/*
+ * Wrapper functions for "math" values that are put into ARTC.mathJax.update
+ */
+ARTC.mathJax.tex = function(tex){ return '$$' + tex + '$$'; };
+ARTC.mathJax.asccii = function(asciimath){ return '`' + asciimath + '`'; };
+ARTC.mathJax.mathml = function(mathML){ return '<script type="math\/mml"> ' + mathML + ' <\/script>'; };
+
+
+ARTC.mathJax.update = (function() {
     // Duplicate of underscore code so as not to import an entire library for one function.
     var isFunction = function(obj) { return !!(obj && obj.constructor && obj.call && obj.apply); };
-
-    /*
-     * Wrapper functions for "math" values that are put into the update function
-     */
-    var tex = function(tex){ return '$$' + tex + '$$'; };
-    var asccii = function(asciimath){ return '`' + asciimath + '`'; };
-    var mathml = function(mathML){ return '<script type="math\/mml"> ' + mathML + ' <\/script>'; };
 
     /*
      * Update an HTML element with a string in content MathML format and then have MathJax render it.
@@ -28,7 +32,7 @@ ARTC.mathJax = (function() {
      *          be something that MathJax can process.
      *          For convenience ARTC.mathJax.tex will wrap TeX properly,
      *          ARTC.mathJax.asccii will wrap AsciiMath
-     *          ARTC.mathJax.mathml will wrap MathML (Presentation or Conent)
+     *          ARTC.mathJax.mathml will wrap MathML (Presentation or Content)
      *   callback - function that will be called after the updated completes, it is called with finished object
      *
      * The finished object has three attributes
@@ -71,10 +75,5 @@ ARTC.mathJax = (function() {
         );
     }
 
-    return {
-        update : update,
-        tex: tex,
-        asccii: asccii,
-        mathml: mathml
-    }
+    return update;
 }());
