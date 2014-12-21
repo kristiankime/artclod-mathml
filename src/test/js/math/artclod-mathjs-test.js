@@ -1,4 +1,8 @@
 
+test("empty: returns blank", function() {
+    equal(ARTC.mathJS.buildParser()("").content, '');
+});
+
 test("2+4: This is here to test adding two numbers", function() {
     equal(ARTC.mathJS.buildParser()("2+4").content, '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <cn> 2 </cn> <cn> 4 </cn> </apply> </math>');
 });
