@@ -4,7 +4,6 @@
     <list default="true" id="65f78998-e0c7-4426-9d9e-753cefc1be6d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.js" afterPath="$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/js/math/artclod-mathjs.js" afterPath="$PROJECT_DIR$/src/main/js/math/artclod-mathjs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="artclod-mathml.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,18 +69,8 @@
       <file leaf-file-name="artclod-mathjs.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/js/math/artclod-mathjs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="2625">
-              <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="artclod-mathjax-mathjs-example.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod-mathjax-mathjs-example.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5084746" vertical-offset="0" max-vertical-offset="590">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1546" max-vertical-offset="2655">
+              <caret line="111" column="36" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -97,11 +86,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="artclod-mathjax-mathjs-example.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod-mathjax-mathjs-example.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.48305085" vertical-offset="0" max-vertical-offset="590">
+              <caret line="19" column="58" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="artclod-mathjs-test.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3645">
-              <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3705">
+              <caret line="198" column="45" selection-start-line="198" selection-start-column="45" selection-end-line="198" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -146,9 +145,9 @@
         <option value="$PROJECT_DIR$/src/test/js/math/artclod-mathjax-test.html" />
         <option value="$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.html" />
         <option value="$PROJECT_DIR$/src/test/js/math/artclod-txt2mathml-test.html" />
-        <option value="$PROJECT_DIR$/src/main/js/math/artclod-mathjs.js" />
-        <option value="$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.js" />
         <option value="$PROJECT_DIR$/src/example/js/math/artclod-mathjax-mathjs-example.html" />
+        <option value="$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.js" />
+        <option value="$PROJECT_DIR$/src/main/js/math/artclod-mathjs.js" />
       </list>
     </option>
   </component>
@@ -615,16 +614,16 @@
       <workItem from="1418870568198" duration="328000" />
       <workItem from="1418956181081" duration="446000" />
       <workItem from="1419114934866" duration="286000" />
-      <workItem from="1419177606065" duration="2559000" />
+      <workItem from="1419177606065" duration="3988000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46043000" />
+    <option name="totallyTimeSpent" value="47472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -644,7 +643,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959612" sideWeight="0.67173254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959612" sideWeight="0.67173254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -834,8 +833,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/js/math/artclod-mathjs-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3645">
-          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2670" max-vertical-offset="3705">
+          <caret line="198" column="45" selection-start-line="198" selection-start-column="45" selection-end-line="198" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -850,16 +849,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/js/math/artclod-mathjs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="2625">
-          <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1546" max-vertical-offset="2655">
+          <caret line="111" column="36" selection-start-line="111" selection-start-column="36" selection-end-line="111" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/example/js/math/artclod-mathjax-mathjs-example.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5084746" vertical-offset="0" max-vertical-offset="590">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.48305085" vertical-offset="0" max-vertical-offset="590">
+          <caret line="19" column="58" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="58" />
           <folding />
         </state>
       </provider>

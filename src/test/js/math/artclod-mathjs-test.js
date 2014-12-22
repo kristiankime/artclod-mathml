@@ -195,6 +195,10 @@ test("3*pow(10, 2): This is here to test can parse symbols and function names", 
     equal(ARTC.mathJS.buildParser()("3*pow(10, 2)").content, '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>');
 });
 
+test("cos^2(x): This is here to test alternative notation for trig powers", function() {
+    equal(ARTC.mathJS.buildParser()("cos^2(x)").content, '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <times/> <cn> 3 </cn> <apply> <power/> <cn> 10 </cn> <cn> 2 </cn> </apply> </apply> </math>');
+});
+
 test("5+-(4): This is here to test +- of a non primative", function() {
     equal(ARTC.mathJS.buildParser()("5+-(4)").content, '<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> <apply> <plus/> <cn> 5 </cn> <apply> <minus/> <cn> 4 </cn> </apply> </apply> </math>');
 });
